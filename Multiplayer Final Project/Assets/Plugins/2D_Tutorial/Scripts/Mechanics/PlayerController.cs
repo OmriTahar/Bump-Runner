@@ -14,6 +14,11 @@ namespace Platformer.Mechanics
     /// </summary>
     public class PlayerController : KinematicObject
     {
+
+        public float MoveSpeed = 5f;
+        public Transform MovePoint;
+        public float DashPower = 10f;
+
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
@@ -29,8 +34,10 @@ namespace Platformer.Mechanics
 
         public JumpState jumpState = JumpState.Grounded;
         private bool stopJump;
-        /*internal new*/ public Collider2D collider2d;
-        /*internal new*/ public AudioSource audioSource;
+        /*internal new*/
+        public Collider2D collider2d;
+        /*internal new*/
+        public AudioSource audioSource;
         public Health health;
         public bool controlEnabled = true;
 
@@ -49,13 +56,18 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+
+            MovePoint.parent = null;
         }
+
 
         protected override void Update()
         {
+
             if (controlEnabled)
             {
                 move.x = Input.GetAxis("Horizontal");
+
                 if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
                     jumpState = JumpState.PrepareToJump;
                 else if (Input.GetButtonUp("Jump"))
@@ -68,8 +80,14 @@ namespace Platformer.Mechanics
             {
                 move.x = 0;
             }
+
             UpdateJumpState();
             base.Update();
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                Dash();
+            }
         }
 
         void UpdateJumpState()
@@ -118,15 +136,13 @@ namespace Platformer.Mechanics
                 }
             }
 
-            if (move.x > 0.01f)
-                spriteRenderer.flipX = false;
-            else if (move.x < -0.01f)
-                spriteRenderer.flipX = true;
+            //if (move.x > 0.01f)
+            //    spriteRenderer.flipX = false;
+            //else if (move.x < -0.01f)
+            //    spriteRenderer.flipX = true;
 
             animator.SetBool("grounded", IsGrounded);
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
-
-            targetVelocity = move * maxSpeed;
         }
 
         public enum JumpState
@@ -136,6 +152,31 @@ namespace Platformer.Mechanics
             Jumping,
             InFlight,
             Landed
+        }
+
+        private void NewGridMovement()
+        {
+            transform.position = Vector3.MoveTowards(transform.position, MovePoint.position, MoveSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, MovePoint.position) <= 0.05f)
+            {
+                if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
+                {
+                    MovePoint.position = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                }
+            }
+
+            if (move.x > 0.01f)
+                spriteRenderer.flipX = false;
+            else if (move.x < -0.01f)
+                spriteRenderer.flipX = true;
+        }
+
+        private void Dash()
+        {
+            animator.SetTrigger("DashTrigger");
+            targetVelocity = new Vector2(DashPower, 0f);
+            transform.Translate(targetVelocity);
         }
     }
 }
