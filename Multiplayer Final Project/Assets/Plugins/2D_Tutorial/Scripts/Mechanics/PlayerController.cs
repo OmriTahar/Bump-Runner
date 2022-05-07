@@ -59,7 +59,12 @@ namespace Platformer.Mechanics
 
             MovePoint.parent = null;
         }
-
+        protected override void Start()
+        {
+            base.Start();
+            Rigidbody2D rigidBody = GetComponent<Rigidbody2D>();
+            rigidBody.bodyType = RigidbodyType2D.Dynamic;
+        }
 
         protected override void Update()
         {

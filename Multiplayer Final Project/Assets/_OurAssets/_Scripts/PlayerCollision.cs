@@ -30,6 +30,9 @@ public class PlayerCollision : MonoBehaviour
                 hitPosition.y = hit.point.y - 0.01f * hit.normal.y;
                 tilemap.SetTile(tilemap.WorldToCell(hitPosition), null);
             }
+            //send player backwards by 1 tile
+            Debug.LogWarning("Player Hit Obstacle, need to change implementation");
+            transform.Translate(new Vector3(transform.position.x-2, 0, 0));
         }
     }
 }
