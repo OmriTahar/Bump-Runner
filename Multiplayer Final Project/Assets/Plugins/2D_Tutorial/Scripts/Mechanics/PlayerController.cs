@@ -49,6 +49,8 @@ namespace Platformer.Mechanics
 
         public Bounds Bounds => collider2d.bounds;
 
+        Rigidbody2D _rigidbody2d;
+
         void Awake()
         {
             health = GetComponent<Health>();
@@ -62,8 +64,8 @@ namespace Platformer.Mechanics
         protected override void Start()
         {
             base.Start();
-            Rigidbody2D rigidBody = GetComponent<Rigidbody2D>();
-            rigidBody.bodyType = RigidbodyType2D.Dynamic;
+            _rigidbody2d = GetComponent<Rigidbody2D>();
+            _rigidbody2d.bodyType = RigidbodyType2D.Dynamic;
         }
 
         protected override void Update()
@@ -179,9 +181,12 @@ namespace Platformer.Mechanics
 
         private void Dash()
         {
-            animator.SetTrigger("DashTrigger");
+            Debug.Log("trying to Dash");
+            //animator.SetTrigger("DashTrigger");
             targetVelocity = new Vector2(DashPower, 0f);
-            transform.Translate(targetVelocity);
+            //transform.Translate(targetVelocity);
+            //_rigidbody2d.AddForce(targetVelocity);
+            //_rigidbody2d.MovePosition(new Vector2 (transform.position.x + targetVelocity.x, transform.position.y));
         }
     }
 }

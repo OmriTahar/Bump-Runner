@@ -32,7 +32,7 @@ public class PlayerCollision : MonoBehaviour
             }
             //send player backwards by 1 tile
             Debug.LogWarning("Player Hit Obstacle, need to change implementation");
-            transform.Translate(new Vector3(transform.position.x-2, 0, 0));
+            //transform.Translate(new Vector3(transform.position.x-2, 0, 0));
         }
     }
 }
