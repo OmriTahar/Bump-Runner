@@ -31,7 +31,8 @@ public class OurPlayerController : MonoBehaviour
     [SerializeField]
     BoxCollider2D _boxCollider2D;
     [SerializeField] LayerMask _jumpableGround;
-
+    //Boost
+    [SerializeField] float _boostMultiplayer;
     //Animations
     [SerializeField]
     Animator _playerAnimator;
@@ -122,11 +123,10 @@ public class OurPlayerController : MonoBehaviour
     {
         _rigidbody2d.AddForce(new Vector2(transform.position.x + dashPower, transform.position.y));
     }
-
-    IEnumerator DashCooldown()
+    public void BoostPlayer()
     {
-        yield return new WaitForSeconds(_dashCooldown);
-        _canDash = true;
+        Debug.Log("Player Should Go Forward");
+        _rigidbody2d.AddForce(new Vector2(transform.position.x + _dashPower, transform.position.y + _dashPower));
     }
 
     void ApplyCooldown()
@@ -175,4 +175,5 @@ public class OurPlayerController : MonoBehaviour
         return isGrounded;
     }
     #endregion
+
 }

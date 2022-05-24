@@ -93,11 +93,6 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    public void ExitToLobby()
-    {
-        PhotonNetwork.LoadLevel(0);
-    }
-
     public void PlayAgain()
     {
         SceneManager.LoadScene(1);
