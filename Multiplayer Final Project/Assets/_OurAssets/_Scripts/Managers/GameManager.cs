@@ -2,20 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoSingleton<GameManager>
 {
 
-    [SerializeField]
-    UIHandler _uiHandler;
+    public UIHandler UiHandler;
+
     bool _isPlayerReady;
     bool _isPlaying = false;
 
     [SerializeField] float _slowTimeOverSeconds;
 
+
     void Start()
     {
         Time.timeScale = 0;
     }
+
     private void Update()
     {
         //if all players in room are ready play
@@ -26,24 +28,25 @@ public class GameManager : Singleton<GameManager>
                 Time.timeScale = 1;
             }
         }
-
     }
 
     void StartGame()
     {
-        _uiHandler.SetReadyScreen(true);
+        UiHandler.SetReadyScreen(true);
     }
 
     public void PlayerIsReady()
     {
         _isPlayerReady = true;
-        _uiHandler.SetReadyScreen(false);
+        UiHandler.SetReadyScreen(false);
     }
+
     public void Victory()
     {
         _isPlaying = false;
         StartCoroutine(SlowTimeTillStop());
     }
+
     IEnumerator SlowTimeTillStop()
     {
         //while (Time.timeScale > 0)

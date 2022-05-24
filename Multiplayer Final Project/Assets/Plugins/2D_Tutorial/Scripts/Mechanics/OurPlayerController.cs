@@ -138,11 +138,7 @@ public class OurPlayerController : MonoBehaviour
         {
             _currentDashCooldownRemaining = 0;
             _canDash = true;
-            // image fill method
-        }
-        else
-        {
-
+            
         }
     }
 
