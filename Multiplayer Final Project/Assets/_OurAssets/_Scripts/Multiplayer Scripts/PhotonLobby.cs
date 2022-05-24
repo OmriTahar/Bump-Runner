@@ -9,7 +9,6 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-        
     }
     private void Start()
     {

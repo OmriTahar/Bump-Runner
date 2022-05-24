@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-
     public UIHandler UiHandler;
 
     bool _isPlayerReady;
     bool _isPlaying = false;
     bool _isGameWon = false;
+    bool _isGameLost = false;
 
     [SerializeField] float _slowTimeOverSeconds;
     float _currentTimeScale;
-
 
 
     void Start()
@@ -35,7 +36,11 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (_isGameWon)
         {
-            SlowTime();
+            SlowTime(true);
+        }
+        else if (_isGameLost)
+        {
+            SlowTime(false);
         }
     }
 
@@ -50,23 +55,22 @@ public class GameManager : MonoSingleton<GameManager>
         UiHandler.SetReadyScreen(false);
     }
 
-    public void Victory()
+    public void GameWon()
     {
-        /*
-        reach victory gate (Win effect - particles)
-        start slow time method
-        when time.scale = 0 - stop all players
-        declare winner
-        */
-
-        print("Victory!");
+        print("Game Won!");
         _isGameWon = true;
-        _currentTimeScale = Time.timeScale;
     }
 
-    public void SlowTime()
+    public void GameLost()
     {
-        print("Slow time!");
+        print("Game Lost!");
+        _isGameLost = true;
+    }
+
+    public void SlowTime(bool isGameWon)
+    {
+        _currentTimeScale = Time.timeScale;
+        print("Slowing time!");
 
         if (_currentTimeScale <= 0.1)
         {
@@ -78,15 +82,24 @@ public class GameManager : MonoSingleton<GameManager>
             _isPlaying = false;
             _isGameWon = false;
 
-            UiHandler.ShowVictoryPanel();
+            UiHandler.ShowResultPanel(isGameWon);
         }
         else
         {
             _currentTimeScale -= Time.deltaTime;
             Time.timeScale = _currentTimeScale;
 
-            print("Time Scale: " + Time.timeScale);
+            print("Time Scale Decending: " + Time.timeScale);
         }
     }
 
+    public void ExitToLobby()
+    {
+        PhotonNetwork.LoadLevel(0);
+    }
+
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene(1);
+    }
 }

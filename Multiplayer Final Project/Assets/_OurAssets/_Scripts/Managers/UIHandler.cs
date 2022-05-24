@@ -10,7 +10,13 @@ public class UIHandler : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _roomName;
 
-    [SerializeField] GameObject _readyScreen;
+    [Header("Panels")]
+    [SerializeField] GameObject _readyPanel;
+
+    [Header("Game Results")]
+    [SerializeField] GameObject _resultPanel;
+    [SerializeField] GameObject _winningText;
+    [SerializeField] GameObject _losingText;
 
     [Header("Player UI")]
     [SerializeField] Image _dashCooldownImage;
@@ -21,11 +27,14 @@ public class UIHandler : MonoBehaviour
         {
             _roomName.text = "RoomName: " + PhotonNetwork.CurrentRoom.Name;
         }
+
+        _readyPanel.SetActive(true);
+        _resultPanel.SetActive(false);
     }
 
     public void SetReadyScreen(bool toActivate)
     {
-        _readyScreen.SetActive(toActivate);
+        _readyPanel.SetActive(toActivate);
     }
 
     public void DashCooldownUI(float cooldownAmount)
@@ -36,8 +45,13 @@ public class UIHandler : MonoBehaviour
         }
     }
 
-    public void ShowVictoryPanel()
+    public void ShowResultPanel(bool isGameWon)
     {
-
+        _resultPanel.SetActive(true);
+        
+        if (isGameWon)
+            _winningText.SetActive(true);
+        else
+            _losingText.SetActive(true);
     }
 }
