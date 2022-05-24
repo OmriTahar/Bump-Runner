@@ -27,6 +27,7 @@ public class UIHandler : MonoBehaviour
 
     public void DashCooldownUI(float cooldownAmount)
     {
+        Debug.Log(cooldownAmount);
         if (_dashCooldownImage != null)
         {
             _dashCooldownImage.fillAmount = cooldownAmount;

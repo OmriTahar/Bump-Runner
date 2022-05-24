@@ -9,7 +9,6 @@ public class OurPlayerController : MonoBehaviour
     #region Private Fields
     [SerializeField]
     Rigidbody2D _rigidbody2d;
-
     //dash
     bool _canDash = true;
     [Header("Dash Settings")]
@@ -42,7 +41,7 @@ public class OurPlayerController : MonoBehaviour
     public Vector2 initialVelocity = new Vector2(1.0f, 10.0f);
     public GameObject tilemapGameObject;
     #endregion
-
+    
     Tilemap tilemap;
     void Start()
     {
@@ -138,8 +137,11 @@ public class OurPlayerController : MonoBehaviour
         {
             _currentDashCooldownRemaining = 0;
             _canDash = true;
+
             
         }
+        var cooldownPrecentage = _currentDashCooldownRemaining / _dashCooldown;
+        GameManager.Instance.UiHandler.DashCooldownUI(1-cooldownPrecentage);
     }
 
     IEnumerator DisableGravity()
