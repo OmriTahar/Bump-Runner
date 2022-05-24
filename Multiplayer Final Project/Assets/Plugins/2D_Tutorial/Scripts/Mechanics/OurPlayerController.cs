@@ -9,27 +9,35 @@ public class OurPlayerController : MonoBehaviour
     #region Private Fields
     [SerializeField]
     Rigidbody2D _rigidbody2d;
+
     //dash
+    bool _canDash = true;
+    [Header("Dash Settings")]
     [SerializeField]
     float _dashPower;
-    [SerializeField]
-    float _dashCooldown;
-    bool _canDash = true;
+    [SerializeField] float _dashCooldown;
+    [SerializeField] float _currentDashCooldownRemaining;
+
+    [Header("Gravity Settings")]
     [SerializeField]
     float _gravityScale;
     [SerializeField]
     float _gravityCooldown;
+
     //jump
     [SerializeField]
     float _jumpPower;
     bool _isGrounded;
+
     [SerializeField]
     BoxCollider2D _boxCollider2D;
     [SerializeField] LayerMask _jumpableGround;
+
     //Animations
     [SerializeField]
     Animator _playerAnimator;
     #endregion
+
     #region Tilemap Collision Fields
     public Vector2 initialVelocity = new Vector2(1.0f, 10.0f);
     public GameObject tilemapGameObject;
@@ -41,6 +49,7 @@ public class OurPlayerController : MonoBehaviour
         SetTilemapCollision();
         _rigidbody2d.gravityScale = _gravityScale;
     }
+
     #region Tilemap Collision
     private void SetTilemapCollision()
     {
@@ -77,6 +86,9 @@ public class OurPlayerController : MonoBehaviour
             TryDash();
         }
 
+        if (!_canDash)
+            ApplyCooldown();
+
         _isGrounded = CheckGrounded();
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -85,6 +97,7 @@ public class OurPlayerController : MonoBehaviour
             Jump();
         }
     }
+
     #region Dash
     private void TryDash()
     {
@@ -93,24 +106,46 @@ public class OurPlayerController : MonoBehaviour
             Debug.Log("Can Not Dash");
             return;
         }
+
         Debug.Log("trying to Dash");
-        //animator.SetTrigger("DashTrigger");
         Dash(_dashPower);
+
         _canDash = false;
+        _currentDashCooldownRemaining = _dashCooldown;
+
         _rigidbody2d.gravityScale = 0;
-        StartCoroutine(DashCooldown());
+
+        //StartCoroutine(DashCooldown());
         StartCoroutine(DisableGravity());
     }
+
     private void Dash(float dashPower)
     {
         _rigidbody2d.AddForce(new Vector2(transform.position.x + dashPower, transform.position.y));
     }
+
     IEnumerator DashCooldown()
     {
-
         yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
     }
+
+    void ApplyCooldown()
+    {
+        _currentDashCooldownRemaining -= Time.deltaTime;
+
+        if (_currentDashCooldownRemaining <= 0f)
+        {
+            _currentDashCooldownRemaining = 0;
+            _canDash = true;
+            // image fill method
+        }
+        else
+        {
+
+        }
+    }
+
     IEnumerator DisableGravity()
     {
         yield return new WaitForSeconds(_gravityCooldown);

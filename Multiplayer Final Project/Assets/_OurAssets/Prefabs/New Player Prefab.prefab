@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1098117843305410274}
   - component: {fileID: 994217445454844159}
   - component: {fileID: 970745847790494142}
-  - component: {fileID: 6459724304486239853}
   - component: {fileID: 8923029980168366476}
+  - component: {fileID: 6459724304486239853}
   - component: {fileID: 1899662578615434566}
   m_Layer: 13
   m_Name: New Player Prefab
@@ -154,19 +154,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &6459724304486239853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993151137258082602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffad43bb006db4856a9c527b89b48db9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 1
 --- !u!82 &8923029980168366476
 AudioSource:
   m_ObjectHideFlags: 0
@@ -263,6 +250,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6459724304486239853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993151137258082602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffad43bb006db4856a9c527b89b48db9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 1
 --- !u!114 &1899662578615434566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,10 +278,13 @@ MonoBehaviour:
   _rigidbody2d: {fileID: 970745847790494142}
   _dashPower: 100
   _dashCooldown: 3
-  jumpPower: 5
+  _gravityScale: 0
+  _gravityCooldown: 0
+  _jumpPower: 0
   _boxCollider2D: {fileID: 994217445454844159}
   _jumpableGround:
     serializedVersion: 2
     m_Bits: 64
+  _playerAnimator: {fileID: 0}
   initialVelocity: {x: 1, y: 10}
   tilemapGameObject: {fileID: 0}
