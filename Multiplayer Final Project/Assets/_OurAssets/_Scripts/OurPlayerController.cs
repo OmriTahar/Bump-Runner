@@ -41,7 +41,7 @@ public class OurPlayerController : MonoBehaviour
     public Vector2 initialVelocity = new Vector2(1.0f, 10.0f);
     public GameObject tilemapGameObject;
     #endregion
-    
+
     Tilemap tilemap;
     void Start()
     {
@@ -72,7 +72,7 @@ public class OurPlayerController : MonoBehaviour
             }
             //send player backwards by 1 tile
             Debug.LogWarning("Player Hit Obstacle, need to change implementation");
-        Dash(-_dashPower);
+            Dash(-_dashPower);
         }
     }
     #endregion
@@ -138,10 +138,10 @@ public class OurPlayerController : MonoBehaviour
             _currentDashCooldownRemaining = 0;
             _canDash = true;
 
-            
+
         }
         var cooldownPrecentage = _currentDashCooldownRemaining / _dashCooldown;
-        GameManager.Instance.UiHandler.DashCooldownUI(1-cooldownPrecentage);
+        GameManager.Instance.UiHandler.DashCooldownUI(cooldownPrecentage);
     }
 
     IEnumerator DisableGravity()

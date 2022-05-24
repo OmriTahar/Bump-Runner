@@ -17,7 +17,10 @@ public class UIHandler : MonoBehaviour
 
     public void Start()
     {
-        _roomName.text = "RoomName: " + PhotonNetwork.CurrentRoom.Name;
+        if (PhotonNetwork.CurrentRoom != null)
+        {
+            _roomName.text = "RoomName: " + PhotonNetwork.CurrentRoom.Name;
+        }
     }
 
     public void SetReadyScreen(bool toActivate)
@@ -27,10 +30,14 @@ public class UIHandler : MonoBehaviour
 
     public void DashCooldownUI(float cooldownAmount)
     {
-        Debug.Log(cooldownAmount);
         if (_dashCooldownImage != null)
         {
-            _dashCooldownImage.fillAmount = cooldownAmount;
+            _dashCooldownImage.fillAmount = 1 - cooldownAmount;
         }
+    }
+
+    public void ShowVictoryPanel()
+    {
+
     }
 }

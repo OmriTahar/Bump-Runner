@@ -9,8 +9,11 @@ public class GameManager : MonoSingleton<GameManager>
 
     bool _isPlayerReady;
     bool _isPlaying = false;
+    bool _isGameWon = false;
 
     [SerializeField] float _slowTimeOverSeconds;
+    float _currentTimeScale;
+
 
 
     void Start()
@@ -26,7 +29,13 @@ public class GameManager : MonoSingleton<GameManager>
             if (_isPlayerReady)
             {
                 Time.timeScale = 1;
+                _isPlayerReady = false;
             }
+        }
+
+        if (_isGameWon)
+        {
+            SlowTime();
         }
     }
 
@@ -43,16 +52,41 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void Victory()
     {
-        _isPlaying = false;
-        StartCoroutine(SlowTimeTillStop());
+        /*
+        reach victory gate (Win effect - particles)
+        start slow time method
+        when time.scale = 0 - stop all players
+        declare winner
+        */
+
+        print("Victory!");
+        _isGameWon = true;
+        _currentTimeScale = Time.timeScale;
     }
 
-    IEnumerator SlowTimeTillStop()
+    public void SlowTime()
     {
-        //while (Time.timeScale > 0)
-        //{
-        //    Time.timeScale -= _slowTimeOverSeconds * Time.deltaTime;
-        //}
-        yield return null;
+        print("Slow time!");
+
+        if (_currentTimeScale <= 0.1)
+        {
+            print("Finished! Time scale is 0.1!");
+
+            _currentTimeScale = 0;
+            Time.timeScale = 0;
+
+            _isPlaying = false;
+            _isGameWon = false;
+
+            UiHandler.ShowVictoryPanel();
+        }
+        else
+        {
+            _currentTimeScale -= Time.deltaTime;
+            Time.timeScale = _currentTimeScale;
+
+            print("Time Scale: " + Time.timeScale);
+        }
     }
+
 }
