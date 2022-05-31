@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8923029980168366476}
   - component: {fileID: 6459724304486239853}
   - component: {fileID: 1899662578615434566}
+  - component: {fileID: 4482312734641522892}
   m_Layer: 13
   m_Name: New Player Prefab
   m_TagString: Player
@@ -120,7 +121,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.09, y: -0.14}
+  m_Offset: {x: -0.08820365, y: -0.1435927}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,7 +132,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.54}
+  m_Size: {x: 0.38826135, y: 0.5328146}
   m_EdgeRadius: 0
 --- !u!50 &970745847790494142
 Rigidbody2D:
@@ -275,16 +276,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fefbef6858537994ea4e9a800ab7319f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPlayerTwo: 0
   _rigidbody2d: {fileID: 970745847790494142}
+  _boxCollider2D: {fileID: 994217445454844159}
   _dashPower: 100
   _dashCooldown: 3
+  _currentDashCooldownRemaining: 0
   _gravityScale: 0
   _gravityCooldown: 0
   _jumpPower: 0
-  _boxCollider2D: {fileID: 994217445454844159}
   _jumpableGround:
     serializedVersion: 2
     m_Bits: 64
   _playerAnimator: {fileID: 0}
+  GotBumped: 0
+  CanGetBumped: 1
   initialVelocity: {x: 1, y: 10}
   tilemapGameObject: {fileID: 0}
+--- !u!70 &4482312734641522892
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993151137258082602}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.09, y: 0.09}
+  m_Size: {x: 0.49, y: 0.0001}
+  m_Direction: 0
