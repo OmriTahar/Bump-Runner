@@ -20,7 +20,7 @@ public class OurPlayerController : MonoBehaviour
     [SerializeField] float _dashPower;
     [SerializeField] float _dashCooldown;
     [SerializeField] float _currentDashCooldownRemaining;
-    bool _canDash = true;
+    private bool _canDash = true;
 
     [Header("Gravity")]
     [SerializeField] float _gravityScale;
@@ -29,22 +29,24 @@ public class OurPlayerController : MonoBehaviour
     [Header("Jump")]
     [SerializeField] float _jumpPower;
     [SerializeField] LayerMask _jumpableGround;
-    bool _isGrounded;
+    private bool _isGrounded;
 
     [Header("Animation")]
     [SerializeField] Animator _playerAnimator;
 
     [Header("Bumping")]
-    public bool GotBumped = false;
-    public bool CanGetBumped = true;
+    public float BumpMultiplier = 3f;
+    public bool WasInvolvedInABump = false;
+    private OurPlayerController _otherPlayer;
 
     #endregion
 
     #region Tilemap Collision Fields
 
+    [Header("Tilemap")]
     public Vector2 initialVelocity = new Vector2(1.0f, 10.0f);
     public GameObject tilemapGameObject;
-    Tilemap _tilemap;
+    private Tilemap _tilemap;
 
     #endregion
 
@@ -53,17 +55,15 @@ public class OurPlayerController : MonoBehaviour
         SetTilemapCollision();
         _rigidbody2d.gravityScale = _gravityScale;
 
-        _boxCollider2D = GetComponent<BoxCollider2D>();
-        _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        if (_boxCollider2D == null)
+            _boxCollider2D = GetComponent<BoxCollider2D>();
+
+        if (_capsuleCollider2D == null)
+            _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
     {
-        //if (GotBumped)
-        //{
-        //    CanGetBumped = false;
-        //}
-
         if (!_isPlayerTwo)
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -90,35 +90,52 @@ public class OurPlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow))
                 Jump();
         }
-        
+
     }
 
     #region PlayersCollision
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player 2")
+        if (_otherPlayer == null)
+            _otherPlayer = collision.GetComponent<OurPlayerController>();
+
+        if (collision.tag == "Player")
         {
-            if (!GotBumped)
+            if (!WasInvolvedInABump)
             {
-                print("Player 2 jumped on me!");
-                StartCoroutine(JumpedOnByOtherPlayer(this));
+                if (WhoGotBumped(collision.transform))
+                {
+                    StartCoroutine(BumpedByOtherPlayer(_otherPlayer));
+                }
             }
-        }
-        else if (collision.tag == "Player")
-        {
-            OurPlayerController otherGuyController = collision.GetComponent<OurPlayerController>();
-            StartCoroutine(JumpedOnByOtherPlayer(otherGuyController));
         }
     }
 
-    IEnumerator JumpedOnByOtherPlayer(OurPlayerController victim)
+    bool WhoGotBumped(Transform otherPlayerTransform)
     {
-        victim._boxCollider2D.isTrigger = true;
-        Dash(-_dashPower);
+        if (transform.position.y < otherPlayerTransform.position.y)
+            return true;
+        else
+            return false;
+    }
+
+    IEnumerator BumpedByOtherPlayer(OurPlayerController otherPlayer)
+    {
+        WasInvolvedInABump = true;
+        otherPlayer.WasInvolvedInABump = true;
+        print(name + " Just got bumped by: " + otherPlayer.name);
+       
+        _boxCollider2D.isTrigger = true;
+        Dash((-_dashPower * BumpMultiplier) * Time.deltaTime);
 
         yield return new WaitForSeconds(0.15f);
-        victim._boxCollider2D.isTrigger = false;
+
+        _rigidbody2d.Sleep();
+        _boxCollider2D.isTrigger = false;
+
+        WasInvolvedInABump = false;
+        otherPlayer.WasInvolvedInABump = false;
     }
 
     #endregion
@@ -185,7 +202,7 @@ public class OurPlayerController : MonoBehaviour
         }
 
         var cooldownPrecentage = _currentDashCooldownRemaining / _dashCooldown;
-        GameManager.Instance.UiHandler.DashCooldownUI(cooldownPrecentage);
+        GameManager.Instance.UiHandler.DashCooldownUI(cooldownPrecentage, _isPlayerTwo);
     }
 
     IEnumerator DisableGravity()
