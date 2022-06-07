@@ -10,6 +10,8 @@ public class OurPlayerController : MonoBehaviour
 
     [Header("General Settings")]
     [SerializeField] bool _isPlayerTwo = false;
+    [SerializeField] KeyCode _jumpKey = KeyCode.W;
+    [SerializeField] KeyCode _dashKey = KeyCode.D;
 
     [Header("General Refrences")]
     [SerializeField] Rigidbody2D _rigidbody2d;
@@ -64,32 +66,40 @@ public class OurPlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!_isPlayerTwo)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-                TryDash();
+        if (Input.GetKeyDown(_dashKey))
+            TryDash();
+        if (!_canDash)
+            ApplyCooldown();
+        _isGrounded = CheckGrounded();
 
-            if (!_canDash)
-                ApplyCooldown();
+        if (Input.GetKeyDown(_jumpKey))
+            Jump();
+        //if (!_isPlayerTwo)
+        //{
+        //    if (Input.GetKeyDown(_dashKey))
+        //        TryDash();
 
-            _isGrounded = CheckGrounded();
+        //    if (!_canDash)
+        //        ApplyCooldown();
 
-            if (Input.GetKeyDown(KeyCode.Space))
-                Jump();
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-                TryDash();
+        //    _isGrounded = CheckGrounded();
 
-            if (!_canDash)
-                ApplyCooldown();
+        //    if (Input.GetKeyDown(KeyCode.W))
+        //        Jump();
+        //}
+        //else
+        //{
+        //    if (Input.GetKeyDown(KeyCode.RightArrow))
+        //        TryDash();
 
-            _isGrounded = CheckGrounded();
+        //    if (!_canDash)
+        //        ApplyCooldown();
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-                Jump();
-        }
+        //    _isGrounded = CheckGrounded();
+
+        //    if (Input.GetKeyDown(KeyCode.UpArrow))
+        //        Jump();
+        //}
 
     }
 
