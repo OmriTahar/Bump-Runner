@@ -11,7 +11,7 @@ public class PlayerCollision : MonoBehaviour
         {
             Debug.Log("Hit On Head");
             //I need to go backwards
-            _player.BoostPlayer();
+            //_player.BoostPlayer();
             //other need to go forwards (send over network)
         }
     }
