@@ -40,6 +40,9 @@ public class OurPlayerController : MonoBehaviour
     public float BumpMultiplier = 3f;
     public bool WasInvolvedInABump = false;
     private OurPlayerController _otherPlayer;
+    [SerializeField] float _invulnerabilityTime;
+    bool _isVulnerable;
+    public static float bumpYOffset;
 
     #endregion
 
@@ -68,52 +71,29 @@ public class OurPlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(_dashKey))
             TryDash();
+
         if (!_canDash)
             ApplyCooldown();
+
         _isGrounded = CheckGrounded();
 
         if (Input.GetKeyDown(_jumpKey))
             Jump();
-        //if (!_isPlayerTwo)
-        //{
-        //    if (Input.GetKeyDown(_dashKey))
-        //        TryDash();
-
-        //    if (!_canDash)
-        //        ApplyCooldown();
-
-        //    _isGrounded = CheckGrounded();
-
-        //    if (Input.GetKeyDown(KeyCode.W))
-        //        Jump();
-        //}
-        //else
-        //{
-        //    if (Input.GetKeyDown(KeyCode.RightArrow))
-        //        TryDash();
-
-        //    if (!_canDash)
-        //        ApplyCooldown();
-
-        //    _isGrounded = CheckGrounded();
-
-        //    if (Input.GetKeyDown(KeyCode.UpArrow))
-        //        Jump();
-        //}
-
     }
 
     #region PlayersCollision
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_otherPlayer == null)
-            _otherPlayer = collision.GetComponent<OurPlayerController>();
-
+        //make sure you hit a player
         if (collision.tag == "Player")
         {
+            //Get other player script;
+            if (_otherPlayer == null)
+                _otherPlayer = collision.GetComponent<OurPlayerController>();
+            //Make sure I was involved in a bump?
             if (!WasInvolvedInABump)
             {
+                //ask if I was higher than the other Player
                 if (WhoGotBumped(collision.transform))
                 {
                     StartCoroutine(BumpedByOtherPlayer(_otherPlayer));
@@ -124,10 +104,13 @@ public class OurPlayerController : MonoBehaviour
 
     bool WhoGotBumped(Transform otherPlayerTransform)
     {
-        if (transform.position.y < otherPlayerTransform.position.y)
+        //If I was lower than the other player and his offset I got bumped
+        if (transform.position.y < otherPlayerTransform.position.y + bumpYOffset)
             return true;
         else
             return false;
+
+        //We should look if I am in front of the player or behind it, we might want to change the bump force accordingly
     }
 
     IEnumerator BumpedByOtherPlayer(OurPlayerController otherPlayer)
