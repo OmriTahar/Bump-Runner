@@ -12,11 +12,11 @@ public class RoomCreationHandler : MonoBehaviour
     RoomNameHandler _roomNameHandler;
     [SerializeField]
     TMP_InputField _inputField;
-    [SerializeField]
-    Button _button;
     
     public void CreateRoom()
-    { 
+    {
+        print("Trying to create room for crying out loud");
+
         if ( _inputField.text != "")
         {
             _roomNameHandler.AddRoomName(_inputField.text);

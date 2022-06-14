@@ -6,6 +6,12 @@ using Photon.Realtime;
 
 public class PhotonLobby : MonoBehaviourPunCallbacks
 {
+
+    bool _isConnecting;
+    [SerializeField] string _gameVersion = "1";
+    [SerializeField] byte _maxPlayerPerRoom = 3;
+
+
     private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -13,12 +19,15 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
-        PhotonNetwork.GameVersion = "0.5.1";
+        _isConnecting = PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.GameVersion = _gameVersion;
+
+        print("Is connecting = " + _isConnecting);
     }
 
     public override void OnConnectedToMaster()
     {
+        base.OnConnectedToMaster();
         Debug.Log("Connected to master");
         PhotonNetwork.JoinLobby();
 
@@ -27,16 +36,19 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
+        base.OnDisconnected(cause);
         print("Disconnected from server. Reason: " + cause.ToString());
     }
 
     public override void OnJoinedLobby()
     {
+        base.OnJoinedLobby();
         Debug.Log("Joined Lobby");
     }
 
     public override void OnCreatedRoom()
     {
+        base.OnCreatedRoom();
         Debug.Log("Room Was Created");
         PhotonNetwork.LoadLevel(1);
     }
@@ -49,9 +61,11 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        base.OnRoomListUpdate(roomList);
+
         foreach (var roomInfo in roomList)
         {
-            Debug.Log(roomInfo.Name);
+            Debug.Log("Added new room: " + roomInfo.Name);
         }
     }
 }
