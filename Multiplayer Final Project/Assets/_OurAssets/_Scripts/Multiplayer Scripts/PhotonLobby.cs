@@ -10,11 +10,13 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.AutomaticallySyncScene = true;
     }
+
     private void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
-        PhotonNetwork.GameVersion = "1";
+        PhotonNetwork.GameVersion = "0.5.1";
     }
+
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
@@ -23,22 +25,31 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         //getListOf Avilable Rooms;
     }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        print("Disconnected from server. Reason: " + cause.ToString());
+    }
+
     public override void OnJoinedLobby()
     {
         base.OnJoinedLobby();
         Debug.Log("Joined Lobby");
     }
+
     public override void OnCreatedRoom()
     {
         base.OnCreatedRoom();
         Debug.Log("Room Was Created");
         PhotonNetwork.LoadLevel(1);
     }
+
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         base.OnCreateRoomFailed(returnCode, message);
         Debug.LogWarning("Join Room Failed!!!");
     }
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         base.OnRoomListUpdate(roomList);
