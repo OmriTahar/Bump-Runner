@@ -27,9 +27,5 @@ public class JoinRoomHandler : MonoBehaviour
             }
         }
         Debug.LogWarning("No Matching Room Was Found");
-        
-
-        
     }
-
 }

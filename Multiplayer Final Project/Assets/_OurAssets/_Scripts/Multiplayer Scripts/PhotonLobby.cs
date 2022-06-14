@@ -19,10 +19,9 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        base.OnConnectedToMaster();
         Debug.Log("Connected to master");
-
         PhotonNetwork.JoinLobby();
+
         //getListOf Avilable Rooms;
     }
 
@@ -33,13 +32,11 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        base.OnJoinedLobby();
         Debug.Log("Joined Lobby");
     }
 
     public override void OnCreatedRoom()
     {
-        base.OnCreatedRoom();
         Debug.Log("Room Was Created");
         PhotonNetwork.LoadLevel(1);
     }
@@ -52,7 +49,6 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        base.OnRoomListUpdate(roomList);
         foreach (var roomInfo in roomList)
         {
             Debug.Log(roomInfo.Name);
