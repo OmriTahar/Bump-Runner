@@ -5,24 +5,21 @@ using UnityEngine.UI;
 
 public class ColorHandler : MonoBehaviour
 {
-    [SerializeField] Image _playerImage;
     [SerializeField] List<ColorButton> _buttonColors;
+    [SerializeField] List<PlayerUISettings> _players;
+    int currentPlayerID = 0;
     private void Start()
     {
-        SetButtonsID();
-        //listen to color event;
+        //set the correct player and player name
+        _players[currentPlayerID].SetPlayerSettings("Your Player");
     }
-    private void SetButtonsID()
+
+    public void SetImageColor(Color color)
     {
-        for (int i = 0; i < _buttonColors.Count; i++)
-        {
-            _buttonColors[i].buttonID = i;
-        }
+        _players[currentPlayerID].SetPlayerColor(color);
     }
-    public void SetImageColor(int buttonID)
+    public void SetPlayerImage()
     {
-        _playerImage.color = _buttonColors[buttonID].colorImage.color;
-        //set actual player color
-        //do not let others set their color
+        //get player number (first player)
     }
 }

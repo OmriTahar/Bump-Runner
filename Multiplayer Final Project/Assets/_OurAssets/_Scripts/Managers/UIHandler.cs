@@ -51,7 +51,10 @@ public class UIHandler : MonoBehaviour
                 _dashCooldownImage_P2.fillAmount = 1 - cooldownAmount;
         }
     }
-
+    public void SetDashColor(Color color)
+    {
+        _dashCooldownImage_P1.color = color;
+    }
     public void ShowResultPanel(bool isGameWon)
     {
         _resultPanel.SetActive(true);

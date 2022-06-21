@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
+using Photon.Pun;
 
 
-public class OurPlayerController : MonoBehaviour
+public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region Private Fields
+    [Header("Multiplayer Fields")]
+    public static GameObject LocalPlayerInstance;
 
     [Header("General Settings")]
     [SerializeField] bool _isPlayerTwo = false;
     [SerializeField] KeyCode _jumpKey = KeyCode.W;
     [SerializeField] KeyCode _dashKey = KeyCode.D;
+    PlayerUISettings _playerUISettings;
+    [SerializeField] SpriteRenderer _playerSprite;
 
     [Header("General Refrences")]
     [SerializeField] Rigidbody2D _rigidbody2d;
@@ -54,6 +60,14 @@ public class OurPlayerController : MonoBehaviour
     private Tilemap _tilemap;
 
     #endregion
+
+    private void Awake()
+    {
+        if (photonView.IsMine)
+        {
+            OurPlayerController.LocalPlayerInstance = this.gameObject;
+        }
+    }
 
     void Start()
     {
@@ -229,4 +243,16 @@ public class OurPlayerController : MonoBehaviour
         return isGrounded;
     }
     #endregion
+
+    public void SetPlayerUISettings()
+    {
+        var color = _playerUISettings.PlayerImage.color;
+        _playerSprite.color = color;
+        GameManager.Instance.UiHandler.SetDashColor(color);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        throw new System.NotImplementedException();
+    }
 }

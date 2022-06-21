@@ -53,6 +53,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         _isPlayerReady = true;
         UiHandler.SetReadyScreen(false);
+
+        //set player stuff
     }
 
     public void GameWon()

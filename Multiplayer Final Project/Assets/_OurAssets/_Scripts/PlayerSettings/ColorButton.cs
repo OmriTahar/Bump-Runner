@@ -6,10 +6,16 @@ using UnityEngine.Events;
 
 public class ColorButton : MonoBehaviour
 {
-    [SerializeField] private UnityEvent setImageColor;
+    [SerializeField] private UnityEvent<Color> setImageColor;
     public Image colorImage;
-    public int buttonID;
 
+    private void Start()
+    {
+        colorImage = GetComponent<Image>();
+    }
     //send color through event
-
+    public void SendColor()
+    {
+        setImageColor.Invoke(colorImage.color);
+    }
 }
