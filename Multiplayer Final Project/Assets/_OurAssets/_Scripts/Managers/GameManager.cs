@@ -11,6 +11,7 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] List<GameObject> _playersSpawnPoints;
     [SerializeField] ColorHandler _colorHandler;
     [SerializeField] GameObject _readyButton;
+    [SerializeField] GameObject _obstaclesTilemap;
 
     bool _isPlayerReady;
     bool _isPlaying = false;
@@ -75,7 +76,8 @@ public class GameManager : MonoSingleton<GameManager>
         if (ourPlayerController != null)
         {
             ourPlayerController.PlayerUISettings = _colorHandler.Players[0];
-            ourPlayerController.SetPlayerUISettings();
+            ourPlayerController.SetPlayer(_obstaclesTilemap);
+
         }
 
     }

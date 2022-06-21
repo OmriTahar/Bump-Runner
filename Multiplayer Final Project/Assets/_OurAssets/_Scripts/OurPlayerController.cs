@@ -56,7 +56,7 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     [Header("Tilemap")]
     public Vector2 initialVelocity = new Vector2(1.0f, 10.0f);
-    public GameObject tilemapGameObject;
+    public GameObject ObstacleTilemap;
     private Tilemap _tilemap;
 
     #endregion
@@ -152,9 +152,9 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         _rigidbody2d.velocity = initialVelocity.x * UnityEngine.Random.Range(-1f, 1f) * Vector3.right + initialVelocity.y * Vector3.down;
 
-        if (tilemapGameObject != null)
+        if (ObstacleTilemap != null)
         {
-            _tilemap = tilemapGameObject.GetComponent<Tilemap>();
+            _tilemap = ObstacleTilemap.GetComponent<Tilemap>();
         }
     }
 
@@ -162,7 +162,7 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         Vector3 hitPosition = Vector3.zero;
 
-        if (_tilemap != null && tilemapGameObject == collision.gameObject)
+        if (_tilemap != null && ObstacleTilemap == collision.gameObject)
         {
             foreach (ContactPoint2D hit in collision.contacts)
             {
@@ -244,7 +244,12 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
     }
     #endregion
 
-    public void SetPlayerUISettings()
+    public void SetPlayer(GameObject obstaclesTilemap)
+    {
+        ObstacleTilemap = obstaclesTilemap;
+        SetPlayerUISettings();
+    }
+    private void SetPlayerUISettings()
     {
         var color = PlayerUISettings.PlayerImage.color;
         _playerSprite.color = color;
