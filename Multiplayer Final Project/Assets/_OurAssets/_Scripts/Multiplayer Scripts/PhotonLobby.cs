@@ -68,4 +68,9 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
             Debug.Log("Added new room: " + roomInfo.Name);
         }
     }
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        base.OnJoinRoomFailed(returnCode, message);
+        Debug.LogWarning("Joining Room Was a failure");
+    }
 }

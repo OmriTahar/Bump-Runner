@@ -15,25 +15,27 @@ public class JoinRoomHandler : MonoBehaviour
 
     public void JoinRoomByName()
     {
-        if (_roomNameHandler.roomNames.Count == 0)
-        {
-            print("There are 0 rooms available");
-            return;
-        }
+        PhotonNetwork.JoinRoom(_inputField.text);
+        //if (_roomNameHandler.roomNames.Count == 0)
+        //{
+        //    print("There are 0 rooms available");
+        //    return;
+        //}
 
 
-        for (int i = 0; i < _roomNameHandler.roomNames.Count; i++)
-        {
-            if (_roomNameHandler.roomNames[i].name == _inputField.text)
-            {
+        //for (int i = 0; i < _roomNameHandler.roomNames.Count; i++)
+        //{
+        //    if (_roomNameHandler.roomNames[i].name == _inputField.text)
+        //    {
 
-                string roomName = _roomNameHandler.roomNames[i].name;
-                Debug.Log($"Joining Room {roomName}");
-                PhotonNetwork.JoinRoom(roomName);
-                //create a room if dosent exist and join it
-                return;
-            }
-        }
-        Debug.LogWarning("No Matching Room Was Found");
+        //        string roomName = _roomNameHandler.roomNames[i].name;
+        //        Debug.Log($"Joining Room {roomName}");
+        //        PhotonNetwork.JoinRoom(roomName);
+
+        //        //create a room if dosent exist and join it
+        //        return;
+        //    }
+        //}
+        //Debug.LogWarning("No Matching Room Was Found");
     }
 }
