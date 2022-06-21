@@ -8,8 +8,9 @@ public class GameManager : MonoSingleton<GameManager>
 {
     public UIHandler UiHandler;
     [SerializeField] GameObject _playerPrefab;
-    [SerializeField] List<GameObject> _playersSpawnPoins;
+    [SerializeField] List<GameObject> _playersSpawnPoints;
     [SerializeField] ColorHandler _colorHandler;
+    [SerializeField] GameObject _readyButton;
 
     bool _isPlayerReady;
     bool _isPlaying = false;
@@ -19,10 +20,20 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] float _slowTimeOverSeconds;
     float _currentTimeScale;
 
-
+    
     void Start()
     {
         Time.timeScale = 0;
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            _readyButton.SetActive(true);
+        }
+        else
+        {
+            _readyButton.SetActive(false);
+        }
+
     }
 
     private void Update()
@@ -58,7 +69,7 @@ public class GameManager : MonoSingleton<GameManager>
         UiHandler.SetReadyScreen(false);
 
         //set player stuff
-        var currentPlayer = PhotonNetwork.Instantiate(_playerPrefab.name, _playersSpawnPoins[0].transform.position, Quaternion.identity, 0);
+        var currentPlayer = PhotonNetwork.Instantiate(_playerPrefab.name, _playersSpawnPoints[0].transform.position, Quaternion.identity, 0);
         var ourPlayerController = currentPlayer.GetComponent<OurPlayerController>();
 
         if (ourPlayerController != null)
