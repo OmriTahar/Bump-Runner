@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/_OurAssets/_Scenes/Lobby.unity
     guid: e31f3f5f4c61ea14597266663b5053c9
   - enabled: 1
-    path: Assets/_OurAssets/_Scenes/Eyal Scene.unity
+    path: Assets/_OurAssets/_Scenes/GameScene.unity
     guid: 3a4bfeceddac4d54d9166b37302825c5
   m_configObjects: {}

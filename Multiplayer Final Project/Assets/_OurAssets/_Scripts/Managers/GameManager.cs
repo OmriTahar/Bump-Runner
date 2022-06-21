@@ -13,6 +13,8 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] GameObject _readyButton;
     [SerializeField] GameObject _obstaclesTilemap;
 
+    public int CurrentUserID;
+
     bool _isPlayerReady;
     bool _isPlaying = false;
     bool _isGameWon = false;
@@ -35,6 +37,8 @@ public class GameManager : MonoSingleton<GameManager>
             _readyButton.SetActive(false);
         }
 
+        CurrentUserID = PhotonNetwork.CurrentRoom.PlayerCount;
+        CurrentUserID -= 1;
     }
 
     private void Update()
@@ -70,12 +74,12 @@ public class GameManager : MonoSingleton<GameManager>
         UiHandler.SetReadyScreen(false);
 
         //set player stuff
-        var currentPlayer = PhotonNetwork.Instantiate(_playerPrefab.name, _playersSpawnPoints[0].transform.position, Quaternion.identity, 0);
+        var currentPlayer = PhotonNetwork.Instantiate(_playerPrefab.name, _playersSpawnPoints[CurrentUserID].transform.position, Quaternion.identity, 0);
         var ourPlayerController = currentPlayer.GetComponent<OurPlayerController>();
 
         if (ourPlayerController != null)
         {
-            ourPlayerController.PlayerUISettings = _colorHandler.Players[0];
+            ourPlayerController.PlayerUISettings = _colorHandler.Players[CurrentUserID];
             ourPlayerController.SetPlayer(_obstaclesTilemap);
 
         }
