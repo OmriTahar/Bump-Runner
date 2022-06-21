@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoSingleton<GameManager>
 {
     public UIHandler UiHandler;
+    [SerializeField] GameObject _playerPrefab;
+    [SerializeField] List<GameObject> _playersSpawnPoins;
+    [SerializeField] ColorHandler _colorHandler;
 
     bool _isPlayerReady;
     bool _isPlaying = false;
@@ -55,6 +58,15 @@ public class GameManager : MonoSingleton<GameManager>
         UiHandler.SetReadyScreen(false);
 
         //set player stuff
+        var currentPlayer = PhotonNetwork.Instantiate(_playerPrefab.name, _playersSpawnPoins[0].transform.position, Quaternion.identity, 0);
+        var ourPlayerController = currentPlayer.GetComponent<OurPlayerController>();
+
+        if (ourPlayerController != null)
+        {
+            ourPlayerController.PlayerUISettings = _colorHandler.Players[0];
+            ourPlayerController.SetPlayerUISettings();
+        }
+
     }
 
     public void GameWon()

@@ -11,6 +11,7 @@ public class PunHandler : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LeaveRoom();
     }
+
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         base.OnPlayerLeftRoom(otherPlayer);

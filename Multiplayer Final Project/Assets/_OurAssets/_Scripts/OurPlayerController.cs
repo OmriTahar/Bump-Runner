@@ -16,8 +16,8 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] bool _isPlayerTwo = false;
     [SerializeField] KeyCode _jumpKey = KeyCode.W;
     [SerializeField] KeyCode _dashKey = KeyCode.D;
-    PlayerUISettings _playerUISettings;
     [SerializeField] SpriteRenderer _playerSprite;
+    public PlayerUISettings PlayerUISettings;
 
     [Header("General Refrences")]
     [SerializeField] Rigidbody2D _rigidbody2d;
@@ -246,7 +246,7 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     public void SetPlayerUISettings()
     {
-        var color = _playerUISettings.PlayerImage.color;
+        var color = PlayerUISettings.PlayerImage.color;
         _playerSprite.color = color;
         GameManager.Instance.UiHandler.SetDashColor(color);
     }

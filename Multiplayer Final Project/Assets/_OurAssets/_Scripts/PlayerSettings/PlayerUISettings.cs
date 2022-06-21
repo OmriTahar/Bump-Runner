@@ -6,10 +6,15 @@ using TMPro;
 
 public class PlayerUISettings : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _playerName;
-    [SerializeField] Image _playerImage;
 
+    [SerializeField] TextMeshProUGUI _playerName;
+
+    [SerializeField] Image _playerImage;
     public Image PlayerImage => _playerImage;
+
+    [SerializeField] int _playerID;
+
+
     public void SetPlayerSettings(string playerNickName)
     {
         _playerName.text = playerNickName;

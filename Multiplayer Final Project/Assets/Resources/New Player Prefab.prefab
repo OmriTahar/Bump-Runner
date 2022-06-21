@@ -17,13 +17,16 @@ GameObject:
   - component: {fileID: 8923029980168366476}
   - component: {fileID: 6459724304486239853}
   - component: {fileID: 1899662578615434566}
+  - component: {fileID: 497172987}
+  - component: {fileID: 497172988}
+  - component: {fileID: 497172989}
   m_Layer: 13
   m_Name: New Player Prefab
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &998713046342904012
 Transform:
   m_ObjectHideFlags: 0
@@ -121,7 +124,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.08820365, y: -0.2}
+  m_Offset: {x: -0.089642555, y: -0.12517706}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -132,7 +135,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.38826135, y: 0.38}
+  m_Size: {x: 0.38538355, y: 0.52964586}
   m_EdgeRadius: 0
 --- !u!70 &4482312734641522892
 CapsuleCollider2D:
@@ -293,20 +296,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayerTwo: 0
+  _jumpKey: 119
+  _dashKey: 100
+  _playerSprite: {fileID: 1098117843305410274}
   _rigidbody2d: {fileID: 970745847790494142}
   _boxCollider2D: {fileID: 994217445454844159}
   _capsuleCollider2D: {fileID: 4482312734641522892}
   _dashPower: 80
-  _dashCooldown: 2
+  _dashCooldown: 1.5
   _currentDashCooldownRemaining: 0
   _gravityScale: 1
   _gravityCooldown: 0.2
-  _jumpPower: 5
+  _jumpPower: 6
   _jumpableGround:
     serializedVersion: 2
     m_Bits: 64
   _playerAnimator: {fileID: 909389772256790418}
-  BumpMultiplier: 200
+  BumpMultiplier: 100
   WasInvolvedInABump: 0
+  _invulnerabilityTime: 0
   initialVelocity: {x: 1, y: 10}
   tilemapGameObject: {fileID: 0}
+--- !u!114 &497172987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993151137258082602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsJumping
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
+--- !u!114 &497172988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993151137258082602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &497172989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993151137258082602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 1899662578615434566}
+  - {fileID: 497172987}
+  - {fileID: 497172988}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

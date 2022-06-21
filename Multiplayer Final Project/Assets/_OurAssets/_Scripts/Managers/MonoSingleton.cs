@@ -1,6 +1,9 @@
 using UnityEngine;
+using Photon.Realtime;
+using Photon.Pun;
 
-public abstract class MonoSingleton<T> : MonoBehaviour where T : Component
+
+public abstract class MonoSingleton<T> : MonoBehaviourPunCallbacks where T : Component
 {
     private static T _instance;
     public static T Instance => _instance;

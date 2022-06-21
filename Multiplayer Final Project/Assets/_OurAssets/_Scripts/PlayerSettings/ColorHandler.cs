@@ -6,17 +6,18 @@ using UnityEngine.UI;
 public class ColorHandler : MonoBehaviour
 {
     [SerializeField] List<ColorButton> _buttonColors;
-    [SerializeField] List<PlayerUISettings> _players;
+    public List<PlayerUISettings> Players;
     int currentPlayerID = 0;
+
     private void Start()
     {
         //set the correct player and player name
-        _players[currentPlayerID].SetPlayerSettings("Your Player");
+        Players[currentPlayerID].SetPlayerSettings("Your Player");
     }
 
     public void SetImageColor(Color color)
     {
-        _players[currentPlayerID].SetPlayerColor(color);
+        Players[currentPlayerID].SetPlayerColor(color);
     }
     public void SetPlayerImage()
     {
