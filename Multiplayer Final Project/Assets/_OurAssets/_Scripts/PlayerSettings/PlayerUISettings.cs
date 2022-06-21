@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
 
-public class PlayerUISettings : MonoBehaviour
+public class PlayerUISettings : MonoBehaviourPunCallbacks, IPunObservable
 {
 
     [SerializeField] TextMeshProUGUI _playerName;
@@ -22,5 +23,17 @@ public class PlayerUISettings : MonoBehaviour
     public void SetPlayerColor(Color color)
     {
         _playerImage.color = color;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(_playerImage.color);
+        }
+        else
+        {
+            _playerImage.color = (Color)stream.ReceiveNext();
+        }
     }
 }
