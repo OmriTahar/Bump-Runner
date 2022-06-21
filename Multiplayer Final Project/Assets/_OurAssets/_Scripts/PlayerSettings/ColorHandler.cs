@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ColorHandler : MonoBehaviour
+public class ColorHandler : MonoBehaviour 
 {
     [SerializeField] List<ColorButton> _buttonColors;
     public List<PlayerUISettings> Players;
@@ -18,6 +18,9 @@ public class ColorHandler : MonoBehaviour
     {
         Players[GameManager.Instance.CurrentUserID].SetPlayerColor(color);
     }
+
+
+
     public void SetPlayerImage()
     {
         //get player number (first player)
