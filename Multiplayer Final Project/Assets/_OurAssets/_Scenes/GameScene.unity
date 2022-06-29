@@ -2617,6 +2617,11 @@ PrefabInstance:
       propertyPath: _playerID
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7458771713478365633, guid: f6f744c48d6145c45bf70e464e388160,
+        type: 3}
+      propertyPath: ChildPhotonView
+      value: 
+      objectReference: {fileID: 692776328}
     - target: {fileID: 8226040724034552146, guid: f6f744c48d6145c45bf70e464e388160,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2750,6 +2755,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e946974dd4cdb54ba6cda55838a9f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &692776328 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1061681296, guid: f6f744c48d6145c45bf70e464e388160,
+    type: 3}
+  m_PrefabInstance: {fileID: 692776325}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &780614973
@@ -10494,6 +10511,11 @@ PrefabInstance:
       propertyPath: _playerID
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7458771713478365633, guid: f6f744c48d6145c45bf70e464e388160,
+        type: 3}
+      propertyPath: ChildPhotonView
+      value: 
+      objectReference: {fileID: 2032689320}
     - target: {fileID: 8226040724034552146, guid: f6f744c48d6145c45bf70e464e388160,
         type: 3}
       propertyPath: m_Pivot.x
@@ -10627,6 +10649,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e946974dd4cdb54ba6cda55838a9f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2032689320 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1061681296, guid: f6f744c48d6145c45bf70e464e388160,
+    type: 3}
+  m_PrefabInstance: {fileID: 2032689317}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2033314487
@@ -11104,6 +11138,11 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7458771713478365633, guid: f6f744c48d6145c45bf70e464e388160,
+        type: 3}
+      propertyPath: ChildPhotonView
+      value: 
+      objectReference: {fileID: 8226040722962032485}
     - target: {fileID: 8226040724034552146, guid: f6f744c48d6145c45bf70e464e388160,
         type: 3}
       propertyPath: m_Pivot.x
@@ -11226,5 +11265,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e946974dd4cdb54ba6cda55838a9f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8226040722962032485 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1061681296, guid: f6f744c48d6145c45bf70e464e388160,
+    type: 3}
+  m_PrefabInstance: {fileID: 8226040722962032483}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

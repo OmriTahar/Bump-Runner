@@ -81,7 +81,6 @@ public class GameManager : MonoSingleton<GameManager>
         {
             ourPlayerController.PlayerUISettings = _colorHandler.Players[CurrentUserID];
             ourPlayerController.SetPlayer(_obstaclesTilemap);
-
         }
 
     }

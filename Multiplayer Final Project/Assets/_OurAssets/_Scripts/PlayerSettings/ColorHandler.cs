@@ -19,8 +19,6 @@ public class ColorHandler : MonoBehaviour
         Players[GameManager.Instance.CurrentUserID].SetPlayerColor(color);
     }
 
-
-
     public void SetPlayerImage()
     {
         //get player number (first player)

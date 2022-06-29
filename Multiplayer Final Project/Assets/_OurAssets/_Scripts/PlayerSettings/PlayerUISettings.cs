@@ -13,12 +13,13 @@ public class PlayerUISettings : MonoBehaviourPunCallbacks
     public Image PlayerImage => _playerImage;
     [SerializeField] int _playerID;
 
-    public PhotonView ChildPhotonView;
+    public PhotonView MyPhotonView;
     public Onchook onchook;
 
     private void Start()
     {
-        ChildPhotonView = PhotonView.Get(PlayerImage.gameObject);
+        //ChildPhotonView = PhotonView.Get(PlayerImage.gameObject);
+        MyPhotonView = GetComponent<PhotonView>();
     }
 
     public void SetPlayerSettings(string playerNickName)
@@ -28,11 +29,13 @@ public class PlayerUISettings : MonoBehaviourPunCallbacks
 
     public void SetPlayerColor(Color color)
     {
-        Debug.Log("Player ID: " + _playerID + " is trying to change his color.");
+        Debug.Log("Player ID: " + _playerID + " is trying to change his color to ." + color.ToString());
 
         var playerColor = new Vector3(color.r, color.g, color.b);
+        _playerName.color = color;
 
-        onchook.photonView.RPC("ChangeColor", RpcTarget.AllBuffered, playerColor);
+        onchook.MyPhotonView.RPC("ChangeColor", RpcTarget.AllBuffered, playerColor);
+        MyPhotonView.RPC("RecieveColorFromOtherPlayers", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b));
     }
 
     [PunRPC]
