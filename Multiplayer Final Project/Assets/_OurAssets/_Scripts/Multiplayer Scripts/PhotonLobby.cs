@@ -10,7 +10,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     bool _isConnecting;
     [SerializeField] string _gameVersion = "1";
     [SerializeField] byte _maxPlayerPerRoom = 3;
-
+    PhotonView _myPhotonView;
 
     private void Awake()
     {
@@ -22,6 +22,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
         _isConnecting = PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.GameVersion = _gameVersion;
         print("Is connecting = " + _isConnecting);
+        _myPhotonView = GetComponent<PhotonView>();
     }
 
     public override void OnConnectedToMaster()
@@ -41,9 +42,15 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     {
         base.OnCreatedRoom();
         Debug.Log("Room Was Created");
+        _myPhotonView.RPC("RoomWasCreated",RpcTarget.AllBuffered);
         PhotonNetwork.LoadLevel(1);
     }
 
+    [PunRPC]
+    public void RoomWasCreated()
+    {
+        Debug.Log("Everyone should know that Room Was Created");
+    }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         base.OnCreateRoomFailed(returnCode, message);
