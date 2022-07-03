@@ -16,6 +16,7 @@ public class JoinRoomHandler : MonoBehaviour
     public void JoinRoomByName()
     {
         PhotonNetwork.JoinRoom(_inputField.text);
+
         //if (_roomNameHandler.roomNames.Count == 0)
         //{
         //    print("There are 0 rooms available");

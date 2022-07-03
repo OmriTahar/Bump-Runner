@@ -127,4 +127,9 @@ public class GameManager : MonoSingleton<GameManager>
     {
         SceneManager.LoadScene(1);
     }
+
+    public void GoToLobby()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

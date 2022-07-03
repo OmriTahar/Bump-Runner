@@ -65,7 +65,7 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            OurPlayerController.LocalPlayerInstance = this.gameObject;
+            LocalPlayerInstance = gameObject;
         }
     }
 
