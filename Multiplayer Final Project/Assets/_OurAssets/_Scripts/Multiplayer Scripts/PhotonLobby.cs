@@ -21,7 +21,6 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     {
         _isConnecting = PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.GameVersion = _gameVersion;
-
         print("Is connecting = " + _isConnecting);
     }
 
@@ -30,14 +29,6 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
         Debug.Log("Connected to master");
         PhotonNetwork.JoinLobby();
-
-        //getListOf Avilable Rooms;
-    }
-
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        base.OnDisconnected(cause);
-        print("Disconnected from server. Reason: " + cause.ToString());
     }
 
     public override void OnJoinedLobby()
@@ -68,6 +59,13 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
             Debug.Log("Added new room: " + roomInfo.Name);
         }
     }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        base.OnDisconnected(cause);
+        print("Disconnected from server. Reason: " + cause.ToString());
+    }
+
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         base.OnJoinRoomFailed(returnCode, message);

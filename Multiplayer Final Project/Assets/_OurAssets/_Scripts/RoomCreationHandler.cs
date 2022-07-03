@@ -8,15 +8,12 @@ using Photon.Realtime;
 
 public class RoomCreationHandler : MonoBehaviour
 {
-    [SerializeField]
-    RoomNameHandler _roomNameHandler;
-    [SerializeField]
-    TMP_InputField _inputField;
-    
+
+    [SerializeField] private RoomNameHandler _roomNameHandler;
+    [SerializeField] private TMP_InputField _inputField;
+
     public void CreateRoom()
     {
-        print("Trying to create room for crying out loud");
-
         if ( _inputField.text != "")
         {
             _roomNameHandler.AddRoomName(_inputField.text);

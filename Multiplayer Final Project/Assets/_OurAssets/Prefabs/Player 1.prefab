@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 8226040722414467143}
   - component: {fileID: 8226040722414467141}
   - component: {fileID: 8226040722414467142}
-  - component: {fileID: 1061681296}
-  - component: {fileID: 584012172}
   m_Layer: 5
   m_Name: Player Image
   m_TagString: Untagged
@@ -77,41 +75,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1061681296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8226040722414467136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &584012172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8226040722414467136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0f7e8030b1613a4dbccef8bbea8236b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _image: {fileID: 8226040722414467142}
 --- !u!1 &8226040723718215387
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,7 +219,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8226040724034552146}
   - component: {fileID: 7458771713478365633}
-  - component: {fileID: 7244703567227728403}
   m_Layer: 5
   m_Name: Player 1
   m_TagString: Untagged
@@ -298,29 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerName: {fileID: 8226040723718215385}
-  _playerImage: {fileID: 8226040722414467142}
   _playerID: 0
-  ChildPhotonView: {fileID: 0}
-  onchook: {fileID: 584012172}
---- !u!114 &7244703567227728403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8226040724034552147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
+  _playerImage: {fileID: 8226040722414467142}
+  MyPhotonView: {fileID: 0}
+  onchook: {fileID: 0}

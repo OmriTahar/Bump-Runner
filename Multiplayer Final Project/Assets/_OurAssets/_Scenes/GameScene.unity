@@ -2621,7 +2621,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ChildPhotonView
       value: 
-      objectReference: {fileID: 692776328}
+      objectReference: {fileID: 0}
     - target: {fileID: 8226040724034552146, guid: f6f744c48d6145c45bf70e464e388160,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2755,18 +2755,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e946974dd4cdb54ba6cda55838a9f63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &692776328 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1061681296, guid: f6f744c48d6145c45bf70e464e388160,
-    type: 3}
-  m_PrefabInstance: {fileID: 692776325}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &780614973
@@ -3059,6 +3047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 998729447}
   - component: {fileID: 998729448}
+  - component: {fileID: 998729449}
   m_Layer: 5
   m_Name: Choose Player Color
   m_TagString: Untagged
@@ -3100,6 +3089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853de31a7a4318e45b150798a730ae04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyPhotonView: {fileID: 0}
   _buttonColors:
   - {fileID: 322459613}
   - {fileID: 25138000}
@@ -3115,6 +3105,28 @@ MonoBehaviour:
   - {fileID: 8226040722962032484}
   - {fileID: 2032689319}
   - {fileID: 692776327}
+--- !u!114 &998729449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998729446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 3
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1049294410
 GameObject:
   m_ObjectHideFlags: 0
@@ -10515,7 +10527,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ChildPhotonView
       value: 
-      objectReference: {fileID: 2032689320}
+      objectReference: {fileID: 0}
     - target: {fileID: 8226040724034552146, guid: f6f744c48d6145c45bf70e464e388160,
         type: 3}
       propertyPath: m_Pivot.x
@@ -10649,18 +10661,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e946974dd4cdb54ba6cda55838a9f63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2032689320 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1061681296, guid: f6f744c48d6145c45bf70e464e388160,
-    type: 3}
-  m_PrefabInstance: {fileID: 2032689317}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2033314487
@@ -11129,20 +11129,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 674818281}
     m_Modifications:
-    - target: {fileID: 1061681296, guid: f6f744c48d6145c45bf70e464e388160, type: 3}
-      propertyPath: sceneViewId
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244703567227728403, guid: f6f744c48d6145c45bf70e464e388160,
-        type: 3}
-      propertyPath: sceneViewId
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 7458771713478365633, guid: f6f744c48d6145c45bf70e464e388160,
         type: 3}
-      propertyPath: ChildPhotonView
+      propertyPath: onchook
       value: 
-      objectReference: {fileID: 8226040722962032485}
+      objectReference: {fileID: 0}
     - target: {fileID: 8226040724034552146, guid: f6f744c48d6145c45bf70e464e388160,
         type: 3}
       propertyPath: m_Pivot.x
@@ -11253,6 +11244,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerUI_ 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8226040724034552147, guid: f6f744c48d6145c45bf70e464e388160,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6f744c48d6145c45bf70e464e388160, type: 3}
 --- !u!114 &8226040722962032484 stripped
@@ -11265,17 +11261,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e946974dd4cdb54ba6cda55838a9f63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8226040722962032485 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1061681296, guid: f6f744c48d6145c45bf70e464e388160,
-    type: 3}
-  m_PrefabInstance: {fileID: 8226040722962032483}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

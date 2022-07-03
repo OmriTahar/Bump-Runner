@@ -9,9 +9,9 @@ public class PlayerUISettings : MonoBehaviourPunCallbacks
 {
 
     [SerializeField] TextMeshProUGUI _playerName;
+    [SerializeField] int _playerID;
     [SerializeField] Image _playerImage;
     public Image PlayerImage => _playerImage;
-    [SerializeField] int _playerID;
 
     public PhotonView MyPhotonView;
     public Onchook onchook;
@@ -27,15 +27,11 @@ public class PlayerUISettings : MonoBehaviourPunCallbacks
         _playerName.text = playerNickName;
     }
 
+    [PunRPC]
     public void SetPlayerColor(Color color)
     {
         Debug.Log("Player ID: " + _playerID + " is trying to change his color to ." + color.ToString());
-
-        var playerColor = new Vector3(color.r, color.g, color.b);
-        _playerName.color = color;
-
-        onchook.MyPhotonView.RPC("ChangeColor", RpcTarget.AllBuffered, playerColor);
-        MyPhotonView.RPC("RecieveColorFromOtherPlayers", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b));
+        GameManager.Instance.colorHandler.SendColor(color);
     }
 
     [PunRPC]

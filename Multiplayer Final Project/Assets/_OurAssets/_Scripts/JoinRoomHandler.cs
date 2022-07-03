@@ -8,10 +8,9 @@ using Photon.Realtime;
 
 public class JoinRoomHandler : MonoBehaviour
 {
-    [SerializeField]
-    RoomNameHandler _roomNameHandler;
-    [SerializeField]
-    TMP_InputField _inputField;
+
+    [SerializeField] private RoomNameHandler _roomNameHandler;
+    [SerializeField] private TMP_InputField _inputField;
 
     public void JoinRoomByName()
     {

@@ -6,18 +6,14 @@ using Photon.Pun;
 
 public class RoomNameHandler : MonoBehaviour
 {
-    [SerializeField]
-    TextMeshProUGUI _roomNamePrefab;
-    [SerializeField]
-    List<TextMeshProUGUI> _roomNames;
 
-    #region Properties
-    public List<TextMeshProUGUI> roomNames => _roomNames;
-    #endregion
+    [SerializeField] private TextMeshProUGUI _roomNamePrefab;
+    [SerializeField] private List<TextMeshProUGUI> _roomNames;
+    public List<TextMeshProUGUI> RoomNames => _roomNames;
 
     public void AddRoomName(string roomName)
     {
-        print("trying to add room: " + roomName);
+        print("Trying to add room: " + roomName);
 
         foreach (var name in _roomNames)
         {
@@ -27,13 +23,15 @@ public class RoomNameHandler : MonoBehaviour
                 return;
             }
         }
+
         var prefabInstance = Instantiate(_roomNamePrefab, transform);
         prefabInstance.name = roomName;
         prefabInstance.text = roomName;
-
         _roomNames.Add(prefabInstance);
-        print("Added room! Name:" + roomName);
+
+        print("Added room! room name: " + roomName);
     }
+
     public void RemoveRoomName(string roomName)
     {
         for (int i = 0; i < _roomNames.Count; i++)

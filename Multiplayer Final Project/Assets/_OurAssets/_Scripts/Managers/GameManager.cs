@@ -9,7 +9,10 @@ public class GameManager : MonoSingleton<GameManager>
     public UIHandler UiHandler;
     [SerializeField] GameObject _playerPrefab;
     [SerializeField] List<GameObject> _playersSpawnPoints;
-    [SerializeField] ColorHandler _colorHandler;
+
+    [SerializeField] private ColorHandler _colorHandler;
+    public ColorHandler colorHandler => _colorHandler;
+
     [SerializeField] GameObject _readyButton;
     [SerializeField] GameObject _obstaclesTilemap;
 

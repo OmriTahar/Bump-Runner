@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ColorHandler : MonoBehaviour 
+public class ColorHandler : MonoBehaviourPunCallbacks
 {
+
+    public PhotonView MyPhotonView;
+
     [SerializeField] List<ColorButton> _buttonColors;
     public List<PlayerUISettings> Players;
+
+    private void Awake()
+    {
+        MyPhotonView = GetComponent<PhotonView>();
+    }
 
     private void Start()
     {
@@ -19,8 +28,23 @@ public class ColorHandler : MonoBehaviour
         Players[GameManager.Instance.CurrentUserID].SetPlayerColor(color);
     }
 
-    public void SetPlayerImage()
+    [PunRPC]
+    public void SendColor(Color color)
     {
-        //get player number (first player)
+        MyPhotonView.RPC("ChangeColor", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b));
+    }
+
+    [PunRPC]
+    public void ChangeColor(Vector3 rgb)
+    {
+        var color = new Color(rgb.x, rgb.y, rgb.z);
+        print("RPC 'change color' was called.");
+
+        SetColor(color);
+    }
+
+    private void SetColor(Color color)
+    {
+        print("Color print: " + color.ToString());
     }
 }
