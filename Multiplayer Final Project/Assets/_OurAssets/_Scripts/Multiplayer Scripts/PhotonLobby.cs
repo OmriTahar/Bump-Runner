@@ -51,6 +51,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     {
         Debug.Log("Everyone should know that Room Was Created");
     }
+
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         base.OnCreateRoomFailed(returnCode, message);
