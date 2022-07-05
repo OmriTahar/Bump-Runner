@@ -31,6 +31,7 @@ public class PlayerUISettings : MonoBehaviourPunCallbacks
     public void SetPlayerColor(Color color)
     {
         Debug.Log("Player ID: " + _playerID + " is trying to change his color to ." + color.ToString());
+        _playerImage.color = color;
         GameManager.Instance.colorHandler.SendColor(color);
     }
 

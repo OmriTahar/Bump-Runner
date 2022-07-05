@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoSingleton<GameManager>, IPunObservable
+public class GameManager : MonoSingleton<GameManager>
 {
     public UIHandler UiHandler;
     [SerializeField] GameObject _playerPrefab;
@@ -49,6 +49,12 @@ public class GameManager : MonoSingleton<GameManager>, IPunObservable
         CurrentUserID -= 1;
 
         photonView.RPC("EnteredRoom", RpcTarget.AllBuffered, CurrentUserID);
+    }
+
+    [PunRPC]
+    public void EnteredRoom(int playerId)
+    {
+        print("RPC FUNC: Player ID: " + playerId + " has entered the room");
     }
 
     private void Update()
@@ -139,11 +145,7 @@ public class GameManager : MonoSingleton<GameManager>, IPunObservable
         Debug.Log("OnJoinedRoom was called");
     }
 
-    [PunRPC]
-    public void EnteredRoom(int playerId)
-    {
-        print("RPC FUNC: Player ID: " + playerId + " has entered the room");
-    }
+    
 
     public void PlayAgain()
     {
@@ -155,8 +157,8 @@ public class GameManager : MonoSingleton<GameManager>, IPunObservable
         SceneManager.LoadScene(0);
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        throw new System.NotImplementedException();
-    }
+    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 }

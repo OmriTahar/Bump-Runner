@@ -81,6 +81,13 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
             _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
     }
 
+    [PunRPC]
+    public void SendDash()
+    {
+        Debug.Log("Player ID: " + GameManager.Instance.CurrentUserID + " is dashing!");
+    }
+
+
     void Update()
     {
         if (Input.GetKeyDown(_dashKey))
@@ -184,6 +191,8 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (!_canDash)
             return;
 
+        photonView.RPC("SendDash", RpcTarget.AllBuffered);
+
         Dash(_dashPower);
 
         _canDash = false;
@@ -258,6 +267,6 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }

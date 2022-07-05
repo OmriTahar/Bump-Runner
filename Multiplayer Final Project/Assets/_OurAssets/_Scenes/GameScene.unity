@@ -2849,7 +2849,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 847943543}
   sceneViewId: 4
   InstantiationId: 0
   isRuntimeInstantiated: 0
