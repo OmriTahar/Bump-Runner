@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoSingleton<GameManager>
+public class GameManager : MonoSingleton<GameManager>, IPunObservable
 {
     public UIHandler UiHandler;
     [SerializeField] GameObject _playerPrefab;
@@ -153,5 +153,10 @@ public class GameManager : MonoSingleton<GameManager>
     public void GoToLobby()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        throw new System.NotImplementedException();
     }
 }
