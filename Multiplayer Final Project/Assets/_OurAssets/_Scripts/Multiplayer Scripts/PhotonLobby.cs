@@ -23,6 +23,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
         PhotonNetwork.GameVersion = _gameVersion;
         print("Is connecting = " + _isConnecting);
         _myPhotonView = GetComponent<PhotonView>();
+
     }
 
     public override void OnConnectedToMaster()
@@ -35,7 +36,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         base.OnJoinedLobby();
-        Debug.Log("Joined Lobby");
+        Debug.Log("OnJoinedLobby was called");
     }
 
     public override void OnCreatedRoom()

@@ -45,6 +45,8 @@ MonoBehaviour:
   - SetPlayerColor
   - SendColor
   - RoomWasCreated
+  - EnteredRoom
+  - EnteredLobby
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

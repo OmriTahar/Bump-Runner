@@ -1321,6 +1321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1182872837}
   - component: {fileID: 1182872836}
+  - component: {fileID: 1182872838}
   m_Layer: 0
   m_Name: PhotonManager
   m_TagString: Untagged
@@ -1340,6 +1341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce4f31b4e6e1464a98f4fa332516dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameVersion: 1
+  _maxPlayerPerRoom: 3
 --- !u!4 &1182872837
 Transform:
   m_ObjectHideFlags: 0
@@ -1354,6 +1357,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1182872838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182872835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1220582129
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,7 +2463,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _roomNameHandler: {fileID: 1822577423}
   _inputField: {fileID: 606435089}
-  _button: {fileID: 230899502}
 --- !u!1 &2089655996
 GameObject:
   m_ObjectHideFlags: 0

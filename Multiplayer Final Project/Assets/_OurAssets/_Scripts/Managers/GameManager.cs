@@ -26,7 +26,12 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] float _slowTimeOverSeconds;
     float _currentTimeScale;
 
-    
+
+    public override void Awake()
+    {
+        base.Awake();
+    }
+
     void Start()
     {
         Time.timeScale = 0;
@@ -42,6 +47,8 @@ public class GameManager : MonoSingleton<GameManager>
 
         CurrentUserID = PhotonNetwork.CurrentRoom.PlayerCount;
         CurrentUserID -= 1;
+
+        photonView.RPC("EnteredRoom", RpcTarget.AllBuffered, CurrentUserID);
     }
 
     private void Update()
@@ -124,6 +131,18 @@ public class GameManager : MonoSingleton<GameManager>
 
             print("Time Scale Decending: " + Time.timeScale);
         }
+    }
+
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        Debug.Log("OnJoinedRoom was called");
+    }
+
+    [PunRPC]
+    public void EnteredRoom(int playerId)
+    {
+        print("RPC FUNC: Player ID: " + playerId + " has entered the room");
     }
 
     public void PlayAgain()
