@@ -11,10 +11,12 @@ public class ColorHandler : MonoBehaviourPunCallbacks
     [SerializeField] List<ColorButton> _buttonColors;
     public List<PlayerUISettings> Players;
 
+    string _myNickname;
+
     private void Start()
     {
-        //set the correct player and player name
-        Players[GameManager.Instance.CurrentUserID].SetPlayerSettings("You");
+        _myNickname = PhotonNetwork.NickName;
+        Players[GameManager.Instance.CurrentUserID].SetPlayerSettings(PhotonNetwork.NickName); //set the correct player and player name
     }
 
     public void SetImageColor(Color color)
