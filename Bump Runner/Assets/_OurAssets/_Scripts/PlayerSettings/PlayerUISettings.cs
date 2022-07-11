@@ -8,18 +8,18 @@ using Photon.Pun;
 public class PlayerUISettings : MonoBehaviourPunCallbacks
 {
 
+    //[SerializeField] int _playerID;
     [SerializeField] TextMeshProUGUI _playerName;
-    [SerializeField] int _playerID;
     [SerializeField] Image _playerImage;
     public Image PlayerImage => _playerImage;
-
-    public void SetPlayerSettings(string playerNickName)
-    {
-        _playerName.text = playerNickName;
-    }
 
     public void ChangePlayerImageColor(Color color)
     {
         PlayerImage.color = color;
+    }
+
+    public void ChangeAvatarName(string name)
+    {
+        _playerName.text = name;
     }
 }

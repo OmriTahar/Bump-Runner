@@ -2470,12 +2470,40 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 692776325}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 692776328}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e946974dd4cdb54ba6cda55838a9f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &692776328 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8226040724034552147, guid: f6f744c48d6145c45bf70e464e388160,
+    type: 3}
+  m_PrefabInstance: {fileID: 692776325}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &692776329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692776328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 6
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &746448843
 GameObject:
   m_ObjectHideFlags: 0
@@ -2772,19 +2800,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fda8cac1ed73e940b1fd1db93756f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UiHandler: {fileID: 1464427156}
   _playerPrefab: {fileID: 993151137258082602, guid: 374a5acfa7f9b764fade33c525c4782f,
     type: 3}
   _playersSpawnPoints:
   - {fileID: 1272070823}
   - {fileID: 854637029}
   - {fileID: 2136584167}
+  _playerAvatars:
+  - {fileID: 8226040722962032485}
+  - {fileID: 2032689320}
+  - {fileID: 692776328}
   _colorHandler: {fileID: 998729448}
+  UiHandler: {fileID: 1464427156}
   _readyButton: {fileID: 1049294410}
   _obstaclesTilemap: {fileID: 1161577266}
   _gridScroll: {fileID: 791447134}
   CurrentUserID: 0
-  _slowTimeOverSeconds: 1
 --- !u!114 &847943544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10709,12 +10740,40 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2032689317}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2032689320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e946974dd4cdb54ba6cda55838a9f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2032689320 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8226040724034552147, guid: f6f744c48d6145c45bf70e464e388160,
+    type: 3}
+  m_PrefabInstance: {fileID: 2032689317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2032689321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032689320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &2033314487
 GameObject:
   m_ObjectHideFlags: 0
@@ -11174,9 +11233,37 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8226040722962032483}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8226040722962032485}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e946974dd4cdb54ba6cda55838a9f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8226040722962032485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8226040724034552147, guid: f6f744c48d6145c45bf70e464e388160,
+    type: 3}
+  m_PrefabInstance: {fileID: 8226040722962032483}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8226040722962032486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8226040722962032485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 5
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

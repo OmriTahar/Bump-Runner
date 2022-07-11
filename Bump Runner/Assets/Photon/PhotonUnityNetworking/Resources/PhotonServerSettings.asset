@@ -49,6 +49,12 @@ MonoBehaviour:
   - StartGameForAll
   - EnableGridMovement
   - DestroyTile
+  - AddPlayerAvatar
+  - ChangePlayerAvatars
+  - SendName
+  - ChangeName
+  - ChangePlayerNames
+  - TogglePlayerAvatars
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

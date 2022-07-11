@@ -14,7 +14,6 @@ public class ColorButton : MonoBehaviour
         colorImage = GetComponent<Image>();
     }
 
-    //send color through event
     public void SendColor()
     {
         _onSetImageColor.Invoke(colorImage.color);

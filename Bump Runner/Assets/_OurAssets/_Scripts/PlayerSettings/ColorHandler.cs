@@ -11,31 +11,31 @@ public class ColorHandler : MonoBehaviourPunCallbacks
     [SerializeField] List<ColorButton> _buttonColors;
     public List<PlayerUISettings> Players;
 
-    string _myNickname;
-
     private void Start()
     {
-        _myNickname = PhotonNetwork.NickName;
-        Players[GameManager.Instance.CurrentUserID].SetPlayerSettings(PhotonNetwork.NickName); //set the correct player and player name
+        //Players[GameManager.Instance.CurrentUserID].SetPlayerName();
     }
 
     public void SetImageColor(Color color)
     {
-        SendColor(color, GameManager.Instance.CurrentUserID);
-    }
-
-    public void SendColor(Color color, int id)
-    {
-        photonView.RPC("ChangeColor", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b), id);
+        photonView.RPC("ChangeColor", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b), GameManager.Instance.CurrentUserID);
     }
 
     [PunRPC]
     public void ChangeColor(Vector3 rgb, int id)
     {
         var color = new Color(rgb.x, rgb.y, rgb.z);
-
-        print("Player id: " + id + " is changing color.");
-
         Players[id].ChangePlayerImageColor(color);
+    }
+
+    public void SetPlayerName(string name)
+    {
+        photonView.RPC("ChangeName", RpcTarget.AllBuffered, GameManager.Instance.CurrentUserID, name);
+    }
+
+    [PunRPC]
+    public void ChangeName(int id, string name)
+    {
+        Players[id].ChangeAvatarName(name);
     }
 }
