@@ -120,25 +120,20 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void GameWon()
     {
-        print("Game Won!");
         _isGameWon = true;
     }
 
     public void GameLost()
     {
-        print("Game Lost!");
         _isGameLost = true;
     }
 
     public void SlowTime(bool isGameWon)
     {
         _currentTimeScale = Time.timeScale;
-        print("Slowing time!");
 
         if (_currentTimeScale <= 0.1)
         {
-            print("Finished! Time scale is 0.1!");
-
             _currentTimeScale = 0;
             Time.timeScale = 0;
 
@@ -151,15 +146,12 @@ public class GameManager : MonoSingleton<GameManager>
         {
             _currentTimeScale -= Time.deltaTime;
             Time.timeScale = _currentTimeScale;
-
-            print("Time Scale Decending: " + Time.timeScale);
         }
     }
 
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        Debug.Log("OnJoinedRoom was called");
     }
 
     
