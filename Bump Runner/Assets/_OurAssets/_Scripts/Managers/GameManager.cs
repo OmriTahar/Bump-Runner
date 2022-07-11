@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
+
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -16,6 +18,8 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] GameObject _readyButton;
     [SerializeField] GameObject _obstaclesTilemap;
     [SerializeField] SideScroll _gridScroll;
+    Tilemap _tilemap;
+    public Tilemap tilemap { set => _tilemap = value; }
 
     public int CurrentUserID;
 
@@ -170,8 +174,13 @@ public class GameManager : MonoSingleton<GameManager>
         SceneManager.LoadScene(0);
     }
 
-    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    //{
-    //    throw new System.NotImplementedException();
-    //}
+    public void SendTileDestruction(Vector3 hitPosition)
+    {
+        photonView.RPC("DestroyTile", RpcTarget.AllBuffered, hitPosition);
+    }
+    [PunRPC]
+    public void DestroyTile(Vector3 hitPosition)
+    {
+        _tilemap.SetTile(_tilemap.WorldToCell(hitPosition), null);
+    }
 }

@@ -22,8 +22,6 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
         _isConnecting = PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.GameVersion = _gameVersion;
         print("Is connecting = " + _isConnecting);
-        _myPhotonView = GetComponent<PhotonView>();
-
     }
 
     public override void OnConnectedToMaster()
@@ -43,7 +41,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     {
         base.OnCreatedRoom();
         Debug.Log("Room Was Created");
-        _myPhotonView.RPC("RoomWasCreated",RpcTarget.AllBuffered);
+        photonView.RPC("RoomWasCreated",RpcTarget.AllBuffered);
         PhotonNetwork.LoadLevel(1);
     }
 

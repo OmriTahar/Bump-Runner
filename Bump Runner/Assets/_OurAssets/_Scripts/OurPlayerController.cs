@@ -71,11 +71,6 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
-        if (!photonView.IsMine)
-        {
-            enabled = false;
-        }
-
         SetTilemapCollision();
         _rigidbody2d.gravityScale = _gravityScale;
 
@@ -85,6 +80,10 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (_capsuleCollider2D == null)
             _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
 
+        if (!photonView.IsMine)
+        {
+            enabled = false;
+        }
     }
 
     [PunRPC]
@@ -168,6 +167,7 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (ObstacleTilemap != null)
         {
             _tilemap = ObstacleTilemap.GetComponent<Tilemap>();
+            GameManager.Instance.tilemap = _tilemap;
         }
     }
 
@@ -181,7 +181,7 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
             {
                 hitPosition.x = hit.point.x - 0.01f * hit.normal.x;
                 hitPosition.y = hit.point.y - 0.01f * hit.normal.y;
-                _tilemap.SetTile(_tilemap.WorldToCell(hitPosition), null);
+                GameManager.Instance.SendTileDestruction(hitPosition);
             }
 
             //send player backwards by 1 tile
@@ -190,6 +190,9 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
     #endregion
+
+   
+
 
     #region Dash
     private void TryDash()
