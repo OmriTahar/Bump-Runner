@@ -2944,8 +2944,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 847943543}
+  ObservedComponents: []
   sceneViewId: 4
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3140,7 +3139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853de31a7a4318e45b150798a730ae04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyPhotonView: {fileID: 0}
   _buttonColors:
   - {fileID: 322459613}
   - {fileID: 25138000}

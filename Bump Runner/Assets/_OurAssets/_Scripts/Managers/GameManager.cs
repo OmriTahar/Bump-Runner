@@ -34,7 +34,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Start()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -78,17 +78,14 @@ public class GameManager : MonoSingleton<GameManager>
             SlowTime(false);
         }
     }
-
-    void StartGame()
+    void StartSetUP()
     {
         UiHandler.SetReadyScreen(true);
     }
-
-    public void PlayerIsReady()
+    void StartGame()
     {
         _isPlayerReady = true;
         UiHandler.SetReadyScreen(false);
-
         //set player stuff
         var currentPlayer = PhotonNetwork.Instantiate(_playerPrefab.name, _playersSpawnPoints[CurrentUserID].transform.position, Quaternion.identity, 0);
         var ourPlayerController = currentPlayer.GetComponent<OurPlayerController>();
@@ -96,9 +93,20 @@ public class GameManager : MonoSingleton<GameManager>
         if (ourPlayerController != null)
         {
             ourPlayerController.PlayerUISettings = _colorHandler.Players[CurrentUserID];
-            ourPlayerController.SetPlayer(_obstaclesTilemap);
+            ourPlayerController.SetPlayer(_obstaclesTilemap, CurrentUserID);
         }
+    }
 
+    public void PlayerIsReady()
+    {
+        photonView.RPC("StartGameForAll",RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    void StartGameForAll()
+    {
+        Debug.Log($"Starting Game for player: {CurrentUserID}");
+        StartGame();
     }
 
     public void GameWon()

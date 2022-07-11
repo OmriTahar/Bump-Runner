@@ -6,9 +6,13 @@ public class SideScroll : MonoBehaviour
 {
     [SerializeField]
     float _scrollSpeed = 0.1f;
+    public bool canMove = false;
     public void Update()
     {
-        Move();
+        if (canMove)
+        {
+            Move();
+        }
     }
 
     private void Move()

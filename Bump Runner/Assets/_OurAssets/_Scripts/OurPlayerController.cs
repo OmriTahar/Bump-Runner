@@ -253,7 +253,7 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
     }
     #endregion
 
-    public void SetPlayer(GameObject obstaclesTilemap)
+    public void SetPlayer(GameObject obstaclesTilemap, int id)
     {
         ObstacleTilemap = obstaclesTilemap;
         SetPlayerUISettings();
@@ -261,8 +261,14 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private void SetPlayerUISettings()
     {
         var color = PlayerUISettings.PlayerImage.color;
-        _playerSprite.color = color;
+        var RGB = new Vector3(color.r, color.g, color.b);
+        photonView.RPC("SetPlayerColor", RpcTarget.AllBuffered, RGB);
         GameManager.Instance.UiHandler.SetDashColor(color);
+    }
+    [PunRPC]
+    public void SetPlayerColor(Vector3 color)
+    {
+        _playerSprite.color = new Color(color.x,color.y,color.z);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

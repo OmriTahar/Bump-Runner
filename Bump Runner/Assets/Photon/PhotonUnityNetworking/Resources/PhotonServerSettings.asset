@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: f4edbafa-0d18-49d5-8790-26d56ad011df
+    AppIdRealtime: 2cc2e21b-c662-42d6-952c-d83a3a858b08
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
@@ -46,6 +46,7 @@ MonoBehaviour:
   - SendColor
   - SetPlayerColor
   - SendDash
+  - StartGameForAll
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
