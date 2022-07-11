@@ -8,27 +8,32 @@ using TMPro;
 public class ColorHandler : MonoBehaviourPunCallbacks
 {
 
-    [SerializeField] TextMeshProUGUI _playerName;
-    [SerializeField] int _playerID;
-    [SerializeField] Image _playerImage;
-    public Image PlayerImage => _playerImage;
-
-    public PhotonView MyPhotonView;
-    public Onchook onchook;
+    [SerializeField] List<ColorButton> _buttonColors;
+    public List<PlayerUISettings> Players;
 
     private void Start()
     {
-        //ChildPhotonView = PhotonView.Get(PlayerImage.gameObject);
-        MyPhotonView = GetComponent<PhotonView>();
+        //set the correct player and player name
+        Players[GameManager.Instance.CurrentUserID].SetPlayerSettings("You");
     }
 
-    public void SetPlayerSettings(string playerNickName)
+    public void SetImageColor(Color color)
     {
-        _playerName.text = playerNickName;
+        SendColor(color, GameManager.Instance.CurrentUserID);
     }
 
-    public void ChangePlayerImageColor(Color color)
+    public void SendColor(Color color, int id)
     {
-        PlayerImage.color = color;
+        photonView.RPC("ChangeColor", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b), id);
+    }
+
+    [PunRPC]
+    public void ChangeColor(Vector3 rgb, int id)
+    {
+        var color = new Color(rgb.x, rgb.y, rgb.z);
+
+        print("Player id: " + id + " is changing color.");
+
+        Players[id].ChangePlayerImageColor(color);
     }
 }
