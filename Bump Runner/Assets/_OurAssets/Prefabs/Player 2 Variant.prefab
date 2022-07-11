@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 993151137258082602, guid: 374a5acfa7f9b764fade33c525c4782f,
         type: 3}
       propertyPath: m_Name
-      value: Player 2
+      value: Player 2 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 993151137258082602, guid: 374a5acfa7f9b764fade33c525c4782f,
         type: 3}

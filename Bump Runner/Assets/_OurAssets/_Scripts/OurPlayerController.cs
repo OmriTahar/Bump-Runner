@@ -71,6 +71,11 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
+        if (!photonView.IsMine)
+        {
+            enabled = false;
+        }
+
         SetTilemapCollision();
         _rigidbody2d.gravityScale = _gravityScale;
 
@@ -79,6 +84,7 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
         if (_capsuleCollider2D == null)
             _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+
     }
 
     [PunRPC]

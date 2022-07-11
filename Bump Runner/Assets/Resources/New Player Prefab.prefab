@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4482312734641522892}
   - component: {fileID: 970745847790494142}
   - component: {fileID: 8923029980168366476}
-  - component: {fileID: 6459724304486239853}
   - component: {fileID: 1899662578615434566}
   - component: {fileID: 497172987}
   - component: {fileID: 497172988}
@@ -37,13 +36,14 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.1885436, y: 0.28351066, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &909389772256790418
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -56,6 +56,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -71,6 +72,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -270,19 +272,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6459724304486239853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993151137258082602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffad43bb006db4856a9c527b89b48db9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 1
 --- !u!114 &1899662578615434566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +288,7 @@ MonoBehaviour:
   _jumpKey: 119
   _dashKey: 100
   _playerSprite: {fileID: 1098117843305410274}
+  PlayerUISettings: {fileID: 0}
   _rigidbody2d: {fileID: 970745847790494142}
   _boxCollider2D: {fileID: 994217445454844159}
   _capsuleCollider2D: {fileID: 4482312734641522892}
@@ -316,7 +306,7 @@ MonoBehaviour:
   WasInvolvedInABump: 0
   _invulnerabilityTime: 0
   initialVelocity: {x: 1, y: 10}
-  tilemapGameObject: {fileID: 0}
+  ObstacleTilemap: {fileID: 0}
 --- !u!114 &497172987
 MonoBehaviour:
   m_ObjectHideFlags: 0
