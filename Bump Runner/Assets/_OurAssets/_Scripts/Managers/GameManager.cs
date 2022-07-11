@@ -161,6 +161,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void GoToLobby()
     {
+        _isGameWon = false;
+        _isGameLost = false;
         Time.timeScale = 1;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene(0);
