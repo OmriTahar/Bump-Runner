@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 
 
-public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
+public class OurPlayerController : MonoBehaviourPunCallbacks
 {
     #region Private Fields
     [Header("Multiplayer Fields")]
@@ -184,15 +184,10 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 GameManager.Instance.SendTileDestruction(hitPosition);
             }
 
-            //send player backwards by 1 tile
-            Debug.LogWarning("Player Hit Obstacle, need to change implementation");
             Dash(-_dashPower);
         }
     }
     #endregion
-
-   
-
 
     #region Dash
     private void TryDash()
@@ -278,10 +273,5 @@ public class OurPlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public void SetPlayerColor(Vector3 color)
     {
         _playerSprite.color = new Color(color.x,color.y,color.z);
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        //throw new System.NotImplementedException();
     }
 }

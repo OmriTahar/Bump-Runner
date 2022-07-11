@@ -4,10 +4,11 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
-
+using Photon.Realtime;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    #region Variables
 
     [Header("Player Refrences")]
     [SerializeField] GameObject _playerPrefab;
@@ -35,6 +36,8 @@ public class GameManager : MonoSingleton<GameManager>
     float _currentTimeScale;
     string _myName = PhotonNetwork.NickName;
 
+    #endregion
+
     void Start()
     {
         if (PhotonNetwork.IsMasterClient)
@@ -51,7 +54,6 @@ public class GameManager : MonoSingleton<GameManager>
         photonView.RPC("EnteredRoom", RpcTarget.AllBuffered, CurrentUserID);
     }
 
-    
     private void Update()
     {
         if (!_isPlaying)
@@ -144,21 +146,22 @@ public class GameManager : MonoSingleton<GameManager>
     [PunRPC]
     public void EnteredRoom(int playerId)
     {
-        print("RPC FUNC: Player ID: " + playerId + " has entered the room");
+        print("Player ID: " + playerId + " has entered the room");
     }
 
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        photonView.RPC("TogglePlayerAvatars", RpcTarget.AllBuffered);
-
         _colorHandler.SetPlayerName(_myName);
+
+        photonView.RPC("TogglePlayerAvatar", RpcTarget.AllBuffered, CurrentUserID);
     }
 
-    public override void OnLeftRoom()
+    public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        base.OnLeftRoom();
-        photonView.RPC("TogglePlayerAvatars", RpcTarget.AllBuffered);
+        base.OnPlayerLeftRoom(otherPlayer);
+        Debug.Log("Player nubmer: " + otherPlayer.ActorNumber + " has DISCONNECTED!");
+        photonView.RPC("TogglePlayerAvatar", RpcTarget.AllBuffered, otherPlayer.ActorNumber - 1);
     }
 
     public void GoToLobby()
@@ -182,27 +185,34 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
     [PunRPC]
-    public void TogglePlayerAvatars()
+    public void TogglePlayerAvatar(int currentUserID)
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        if (_playerAvatars[currentUserID].activeInHierarchy)
         {
-            _playerAvatars[0].gameObject.SetActive(true);
-            _playerAvatars[1].gameObject.SetActive(false);
-            _playerAvatars[2].gameObject.SetActive(false);
+            _playerAvatars[currentUserID].SetActive(false);
         }
-        else if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
-        {
-            _playerAvatars[0].gameObject.SetActive(true);
-            _playerAvatars[1].gameObject.SetActive(true);
-            _playerAvatars[2].gameObject.SetActive(false);
+        else
+            _playerAvatars[currentUserID].SetActive(true);
 
-        }
-        else if (PhotonNetwork.CurrentRoom.PlayerCount == 3)
-        {
-            _playerAvatars[0].gameObject.SetActive(true);
-            _playerAvatars[1].gameObject.SetActive(true);
-            _playerAvatars[2].gameObject.SetActive(true);
-        }
+        //if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        //{
+        //    _playerAvatars[0].gameObject.SetActive(true);
+        //    _playerAvatars[1].gameObject.SetActive(false);
+        //    _playerAvatars[2].gameObject.SetActive(false);
+        //}
+        //else if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        //{
+        //    _playerAvatars[0].gameObject.SetActive(true);
+        //    _playerAvatars[1].gameObject.SetActive(true);
+        //    _playerAvatars[2].gameObject.SetActive(false);
+
+        //}
+        //else if (PhotonNetwork.CurrentRoom.PlayerCount == 3)
+        //{
+        //    _playerAvatars[0].gameObject.SetActive(true);
+        //    _playerAvatars[1].gameObject.SetActive(true);
+        //    _playerAvatars[2].gameObject.SetActive(true);
+        //}
     }
 
 }
