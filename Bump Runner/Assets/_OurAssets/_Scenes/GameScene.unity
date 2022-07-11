@@ -2819,6 +2819,7 @@ GameObject:
   - component: {fileID: 791447133}
   - component: {fileID: 791447132}
   - component: {fileID: 791447134}
+  - component: {fileID: 791447135}
   m_Layer: 0
   m_Name: Grid (Scrolling)
   m_TagString: Untagged
@@ -2870,6 +2871,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scrollSpeed: 1
   canMove: 0
+--- !u!114 &791447135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791447131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &847943541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2925,6 +2948,7 @@ MonoBehaviour:
   _colorHandler: {fileID: 998729448}
   _readyButton: {fileID: 1049294410}
   _obstaclesTilemap: {fileID: 1161577266}
+  _gridScroll: {fileID: 791447134}
   CurrentUserID: 0
   _slowTimeOverSeconds: 1
 --- !u!114 &847943544

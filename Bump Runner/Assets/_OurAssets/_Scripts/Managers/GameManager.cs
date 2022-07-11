@@ -15,6 +15,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     [SerializeField] GameObject _readyButton;
     [SerializeField] GameObject _obstaclesTilemap;
+    [SerializeField] SideScroll _gridScroll;
 
     public int CurrentUserID;
 
@@ -94,6 +95,10 @@ public class GameManager : MonoSingleton<GameManager>
         {
             ourPlayerController.PlayerUISettings = _colorHandler.Players[CurrentUserID];
             ourPlayerController.SetPlayer(_obstaclesTilemap, CurrentUserID);
+        }
+        if(PhotonNetwork.IsMasterClient)
+        {
+            _gridScroll.StartGrid();
         }
     }
 
