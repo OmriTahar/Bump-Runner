@@ -7,9 +7,16 @@ public class LosingCondition : MonoBehaviourPunCallbacks
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<OurPlayerController>().enabled)
+        if (collision.CompareTag("Player"))
         {
-            GameManager.Instance.GameLost();
+            var losingPlayer = collision.GetComponent<OurPlayerController>();
+
+            if (losingPlayer != null && losingPlayer.enabled)
+            {
+                GameManager.Instance.GameLost();
+            }
+            else
+                Debug.LogWarning("Losing player is null");
         }
     }
 }

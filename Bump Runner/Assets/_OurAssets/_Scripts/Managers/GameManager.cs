@@ -154,8 +154,6 @@ public class GameManager : MonoSingleton<GameManager>
         base.OnJoinedRoom();
     }
 
-    
-
     public void PlayAgain()
     {
         SceneManager.LoadScene(1);
@@ -163,6 +161,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void GoToLobby()
     {
+        Time.timeScale = 1;
+        PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene(0);
     }
 

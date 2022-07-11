@@ -10,7 +10,6 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     bool _isConnecting;
     [SerializeField] string _gameVersion = "1";
     [SerializeField] byte _maxPlayerPerRoom = 3;
-    PhotonView _myPhotonView;
 
     private void Awake()
     {
