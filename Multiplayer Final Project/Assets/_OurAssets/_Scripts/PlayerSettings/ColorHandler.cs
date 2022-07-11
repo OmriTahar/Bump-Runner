@@ -7,15 +7,9 @@ using UnityEngine.UI;
 public class ColorHandler : MonoBehaviourPunCallbacks
 {
 
-    public PhotonView MyPhotonView;
-
     [SerializeField] List<ColorButton> _buttonColors;
     public List<PlayerUISettings> Players;
 
-    private void Awake()
-    {
-        MyPhotonView = GetComponent<PhotonView>();
-    }
 
     private void Start()
     {
@@ -25,26 +19,21 @@ public class ColorHandler : MonoBehaviourPunCallbacks
 
     public void SetImageColor(Color color)
     {
-        Players[GameManager.Instance.CurrentUserID].SetPlayerColor(color);
+        SendColor(color, GameManager.Instance.CurrentUserID);
     }
 
-    [PunRPC]
-    public void SendColor(Color color)
+    public void SendColor(Color color, int id)
     {
-        MyPhotonView.RPC("ChangeColor", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b));
+        photonView.RPC("ChangeColor", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b), id);
     }
 
     [PunRPC]
-    public void ChangeColor(Vector3 rgb)
+    public void ChangeColor(Vector3 rgb, int id)
     {
         var color = new Color(rgb.x, rgb.y, rgb.z);
-        print("RPC 'change color' was called.");
 
-        SetColor(color);
-    }
+        print("Player id: " + id + " is changing color.");
 
-    private void SetColor(Color color)
-    {
-        print("Color print: " + color.ToString());
+        Players[id].ChangePlayerImageColor(color);
     }
 }

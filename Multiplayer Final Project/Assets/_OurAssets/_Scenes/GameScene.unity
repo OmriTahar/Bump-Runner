@@ -270,7 +270,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onSetImageColor:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 998729448}
+        m_TargetAssemblyTypeName: ColorHandler, Assembly-CSharp
+        m_MethodName: SetImageColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   colorImage: {fileID: 0}
 --- !u!1 &34469993
 GameObject:
@@ -723,7 +735,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onSetImageColor:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 998729448}
+        m_TargetAssemblyTypeName: ColorHandler, Assembly-CSharp
+        m_MethodName: SetImageColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   colorImage: {fileID: 0}
 --- !u!1 &300144015
 GameObject:
@@ -1041,7 +1065,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onSetImageColor:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 998729448}
+        m_TargetAssemblyTypeName: ColorHandler, Assembly-CSharp
+        m_MethodName: SetImageColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   colorImage: {fileID: 0}
 --- !u!1 &349684957
 GameObject:
@@ -1324,7 +1360,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onSetImageColor:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 998729448}
+        m_TargetAssemblyTypeName: ColorHandler, Assembly-CSharp
+        m_MethodName: SetImageColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   colorImage: {fileID: 0}
 --- !u!1 &439590126
 GameObject:
@@ -1617,7 +1665,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onSetImageColor:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 998729448}
+        m_TargetAssemblyTypeName: ColorHandler, Assembly-CSharp
+        m_MethodName: SetImageColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   colorImage: {fileID: 0}
 --- !u!1 &593118166
 GameObject:
@@ -2322,7 +2382,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onSetImageColor:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 998729448}
+        m_TargetAssemblyTypeName: ColorHandler, Assembly-CSharp
+        m_MethodName: SetImageColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   colorImage: {fileID: 0}
 --- !u!1 &674818280
 GameObject:
@@ -2849,8 +2921,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 847943543}
+  ObservedComponents: []
   sceneViewId: 4
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3041,7 +3112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853de31a7a4318e45b150798a730ae04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyPhotonView: {fileID: 0}
   _buttonColors:
   - {fileID: 322459613}
   - {fileID: 25138000}
@@ -9163,7 +9233,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onSetImageColor:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 998729448}
+        m_TargetAssemblyTypeName: ColorHandler, Assembly-CSharp
+        m_MethodName: SetImageColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   colorImage: {fileID: 0}
 --- !u!1 &1464427151
 GameObject:
@@ -9514,7 +9596,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onSetImageColor:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 998729448}
+        m_TargetAssemblyTypeName: ColorHandler, Assembly-CSharp
+        m_MethodName: SetImageColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   colorImage: {fileID: 0}
 --- !u!1 &1551755774
 GameObject:
@@ -9911,7 +10005,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onSetImageColor:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 998729448}
+        m_TargetAssemblyTypeName: ColorHandler, Assembly-CSharp
+        m_MethodName: SetImageColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   colorImage: {fileID: 0}
 --- !u!1 &1731140983
 GameObject:
@@ -10208,7 +10314,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onSetImageColor:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 998729448}
+        m_TargetAssemblyTypeName: ColorHandler, Assembly-CSharp
+        m_MethodName: SetImageColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   colorImage: {fileID: 0}
 --- !u!1 &1906352653
 GameObject:
