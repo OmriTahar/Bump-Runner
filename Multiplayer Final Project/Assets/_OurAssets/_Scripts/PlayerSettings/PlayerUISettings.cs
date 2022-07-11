@@ -27,21 +27,6 @@ public class PlayerUISettings : MonoBehaviourPunCallbacks
         _playerName.text = playerNickName;
     }
 
-    //public void SetPlayerColor(Color color)
-    //{
-    //    Debug.Log("Player ID: " + _playerID + " is trying to change his color to ." + color.ToString());
-    //    _playerImage.color = color;
-    //    GameManager.Instance.colorHandler.SendColor(color);
-    //}
-
-    //[PunRPC]
-    //public void RecieveColorFromOtherPlayers(Vector3 rgb)
-    //{
-    //    _playerImage.color = new Color(rgb.x, rgb.y, rgb.z);
-
-    //    Debug.Log("Player ID: " + _playerID + " Changed his color to: " + _playerImage.color);
-    //}
-
     public void ChangePlayerImageColor(Color color)
     {
         PlayerImage.color = color;

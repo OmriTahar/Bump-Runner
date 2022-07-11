@@ -3,48 +3,32 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ColorHandler : MonoBehaviourPunCallbacks
 {
 
+    [SerializeField] TextMeshProUGUI _playerName;
+    [SerializeField] int _playerID;
+    [SerializeField] Image _playerImage;
+    public Image PlayerImage => _playerImage;
+
     public PhotonView MyPhotonView;
-
-    [SerializeField] List<ColorButton> _buttonColors;
-    public List<PlayerUISettings> Players;
-
-    private void Awake()
-    {
-        MyPhotonView = GetComponent<PhotonView>();
-    }
+    public Onchook onchook;
 
     private void Start()
     {
-        //set the correct player and player name
-        Players[GameManager.Instance.CurrentUserID].SetPlayerSettings("Your Player");
+        //ChildPhotonView = PhotonView.Get(PlayerImage.gameObject);
+        MyPhotonView = GetComponent<PhotonView>();
     }
 
-    public void SetImageColor(Color color)
+    public void SetPlayerSettings(string playerNickName)
     {
-        Players[GameManager.Instance.CurrentUserID].SetPlayerColor(color);
+        _playerName.text = playerNickName;
     }
 
-    [PunRPC]
-    public void SendColor(Color color)
+    public void ChangePlayerImageColor(Color color)
     {
-        MyPhotonView.RPC("ChangeColor", RpcTarget.AllBuffered, new Vector3(color.r, color.g, color.b));
-    }
-
-    [PunRPC]
-    public void ChangeColor(Vector3 rgb)
-    {
-        var color = new Color(rgb.x, rgb.y, rgb.z);
-        print("RPC 'change color' was called.");
-
-        SetColor(color);
-    }
-
-    private void SetColor(Color color)
-    {
-        print("Color print: " + color.ToString());
+        PlayerImage.color = color;
     }
 }
