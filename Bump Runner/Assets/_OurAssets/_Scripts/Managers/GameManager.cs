@@ -16,8 +16,8 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] List<GameObject> _playerAvatars;
 
     [Header("Other Refrences")]
-    [SerializeField] ColorHandler _colorHandler;
-    public ColorHandler colorHandler => _colorHandler;
+    [SerializeField] PlayerUI_Handler _playerUI_Handler;
+    public PlayerUI_Handler playerUI_Handler => _playerUI_Handler;
     public UIHandler UiHandler;
     [SerializeField] GameObject _readyButton;
     [SerializeField] GameObject _obstaclesTilemap;
@@ -50,7 +50,7 @@ public class GameManager : MonoSingleton<GameManager>
         CurrentUserID = PhotonNetwork.CurrentRoom.PlayerCount;
         CurrentUserID -= 1;
 
-        _colorHandler.SetPlayerName(_myName);
+        _playerUI_Handler.SetPlayerName(_myName);
         photonView.RPC("EnteredRoom", RpcTarget.AllBuffered, CurrentUserID);
     }
 
@@ -90,7 +90,7 @@ public class GameManager : MonoSingleton<GameManager>
 
         if (ourPlayerController != null)
         {
-            ourPlayerController.PlayerUISettings = _colorHandler.Players[CurrentUserID];
+            ourPlayerController.PlayerUISettings = _playerUI_Handler.Players[CurrentUserID];
             ourPlayerController.SetPlayer(_obstaclesTilemap, CurrentUserID);
         }
 
@@ -152,7 +152,7 @@ public class GameManager : MonoSingleton<GameManager>
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        _colorHandler.SetPlayerName(_myName);
+        _playerUI_Handler.SetPlayerName(_myName);
 
         photonView.RPC("TogglePlayerAvatar", RpcTarget.AllBuffered, CurrentUserID);
     }

@@ -5,16 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ColorHandler : MonoBehaviourPunCallbacks
+public class PlayerUI_Handler : MonoBehaviourPunCallbacks
 {
 
     [SerializeField] List<ColorButton> _buttonColors;
     public List<PlayerUISettings> Players;
-
-    private void Start()
-    {
-        //Players[GameManager.Instance.CurrentUserID].SetPlayerName();
-    }
 
     public void SetImageColor(Color color)
     {
