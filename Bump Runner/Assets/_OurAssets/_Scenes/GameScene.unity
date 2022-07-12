@@ -2816,6 +2816,7 @@ MonoBehaviour:
   _obstaclesTilemap: {fileID: 1161577266}
   _gridScroll: {fileID: 791447134}
   CurrentUserID: 0
+  _gameOverCooldown: 0.5
 --- !u!114 &847943544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8560,7 +8561,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 847943543}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GoToLobby
+        m_MethodName: LeaveGameRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

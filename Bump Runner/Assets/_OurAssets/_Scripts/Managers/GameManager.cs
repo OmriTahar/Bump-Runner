@@ -36,6 +36,11 @@ public class GameManager : MonoSingleton<GameManager>
     float _currentTimeScale;
     string _myName = PhotonNetwork.NickName;
 
+    //winning and losing
+    List <int> _winOrder = new List<int>();
+    int _maxPlayersThatCanWin = 3;
+    bool _isGameOver = false;
+    [SerializeField] float _gameOverCooldown = 0.5f;
     #endregion
 
     void Start()
@@ -73,6 +78,11 @@ public class GameManager : MonoSingleton<GameManager>
         {
             SlowTime(false);
         }
+        if (_winOrder.Count == _maxPlayersThatCanWin && _isGameOver)
+        {
+            Debug.Log("Game is over");
+            GameOver();
+        }
     }
 
     void StartSetUP()
@@ -84,7 +94,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         _isPlayerReady = true;
         UiHandler.SetReadyScreen(false);
-        
+        _maxPlayersThatCanWin = PhotonNetwork.CurrentRoom.PlayerCount;
         var currentPlayer = PhotonNetwork.Instantiate(_playerPrefab.name, _playersSpawnPoints[CurrentUserID].transform.position, Quaternion.identity, 0);
         var ourPlayerController = currentPlayer.GetComponent<OurPlayerController>();
 
@@ -115,13 +125,46 @@ public class GameManager : MonoSingleton<GameManager>
     public void GameWon()
     {
         _isGameWon = true;
+        photonView.RPC("AddWinningPlayer", RpcTarget.AllBuffered, CurrentUserID);
+
+    }
+    [PunRPC]
+    public void AddWinningPlayer(int playerID)
+    {
+        _winOrder.Add(playerID);
+        Debug.Log($"Player {playerID} has gotten to the vicroty gate!");
     }
 
     public void GameLost()
     {
         _isGameLost = true;
+        photonView.RPC("ReduceMaxWinsAmount", RpcTarget.AllBuffered);
     }
-
+    [PunRPC]
+    public void ReduceMaxWinsAmount()
+    {
+        _maxPlayersThatCanWin -= 1;
+    }
+    private void GameOver()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.AutomaticallySyncScene = false;
+            photonView.RPC("LeaveGameRoom", RpcTarget.AllBuffered);
+        }
+    }
+    [PunRPC]
+    public void LeaveGameRoom()
+    {
+            Time.timeScale = 1;
+            PhotonNetwork.LeaveRoom();
+            SceneManager.LoadScene(0);
+    }
+    IEnumerator GameOverCooldown()
+    {
+        yield return new WaitForSeconds(_gameOverCooldown);
+        _isGameOver = true;
+    }
     public void SlowTime(bool isGameWon)
     {
         _currentTimeScale = Time.timeScale;
@@ -129,12 +172,12 @@ public class GameManager : MonoSingleton<GameManager>
         if (_currentTimeScale <= 0.1)
         {
             _currentTimeScale = 0;
-            Time.timeScale = 0;
+            Time.timeScale = 0.1f;
 
             _isPlaying = false;
             _isGameWon = false;
-
             UiHandler.ShowResultPanel(isGameWon);
+            StartCoroutine(GameOverCooldown());
         }
         else
         {
@@ -162,15 +205,6 @@ public class GameManager : MonoSingleton<GameManager>
         base.OnPlayerLeftRoom(otherPlayer);
         Debug.Log("Player nubmer: " + otherPlayer.ActorNumber + " has DISCONNECTED!");
         photonView.RPC("TogglePlayerAvatar", RpcTarget.AllBuffered, otherPlayer.ActorNumber - 1);
-    }
-
-    public void GoToLobby()
-    {
-        _isGameWon = false;
-        _isGameLost = false;
-        Time.timeScale = 1;
-        PhotonNetwork.LeaveRoom();
-        SceneManager.LoadScene(0);
     }
 
     public void SendTileDestruction(Vector3 hitPosition)

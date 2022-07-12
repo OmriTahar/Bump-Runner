@@ -5,14 +5,16 @@ using Photon.Pun;
 
 public class LosingCondition : MonoBehaviourPunCallbacks
 {
+    bool hasLost = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             var losingPlayer = collision.GetComponent<OurPlayerController>();
 
-            if (losingPlayer != null && losingPlayer.enabled)
+            if (losingPlayer != null && losingPlayer.enabled && !hasLost)
             {
+                hasLost = true;
                 GameManager.Instance.GameLost();
             }
             else

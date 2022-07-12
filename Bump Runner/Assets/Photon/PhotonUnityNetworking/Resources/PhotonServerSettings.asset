@@ -56,6 +56,9 @@ MonoBehaviour:
   - ChangePlayerNames
   - TogglePlayerAvatars
   - TogglePlayerAvatar
+  - AddWinningPlayer
+  - ReduceMaxWinsAmount
+  - LeaveGameRoom
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

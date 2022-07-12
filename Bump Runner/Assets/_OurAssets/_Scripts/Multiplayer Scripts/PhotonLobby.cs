@@ -18,9 +18,18 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        _isConnecting = PhotonNetwork.ConnectUsingSettings();
-        PhotonNetwork.GameVersion = _gameVersion;
-        print("Is connecting = " + _isConnecting);
+        if (!PhotonNetwork.IsConnected)
+        {
+            _isConnecting = PhotonNetwork.ConnectUsingSettings();
+            PhotonNetwork.GameVersion = _gameVersion;
+            print("Is connecting = " + _isConnecting);
+            //PhotonNetwork.autojoinlobby
+        }
+        else
+        {
+            PhotonNetwork.JoinLobby();
+            Debug.Log("TryingToJoinLobby");
+        }
     }
 
     public override void OnConnectedToMaster()

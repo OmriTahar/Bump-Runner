@@ -15,8 +15,15 @@ public class LobbyManager : MonoBehaviour
 
     private void Awake()
     {
-        _introCanvas.SetActive(true);
-        _lobbyCanvas.SetActive(false);
+        if (PhotonNetwork.NickName == "")
+        {
+            _introCanvas.SetActive(true);
+            _lobbyCanvas.SetActive(false);
+        }
+        else
+        {
+            GoToLobby();
+        }
     }
 
     public void GoToLobby()
