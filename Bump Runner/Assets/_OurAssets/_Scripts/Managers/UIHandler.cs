@@ -15,12 +15,12 @@ public class UIHandler : MonoBehaviour
 
     [Header("Game Results")]
     [SerializeField] GameObject _resultPanel;
+    [SerializeField] TextMeshProUGUI _resultText;
     [SerializeField] GameObject _winningText;
     [SerializeField] GameObject _losingText;
 
     [Header("Player UI")]
     [SerializeField] Image _dashCooldownImage_P1;
-    [SerializeField] Image _dashCooldownImage_P2;
 
     public void Start()
     {
@@ -38,23 +38,17 @@ public class UIHandler : MonoBehaviour
         _readyPanel.SetActive(toActivate);
     }
 
-    public void DashCooldownUI(float cooldownAmount, bool isPlayerTwo)
+    public void DashCooldownUI(float cooldownAmount)
     {
-        if (!isPlayerTwo)
-        {
-            if (_dashCooldownImage_P1 != null)
-                _dashCooldownImage_P1.fillAmount = 1 - cooldownAmount;
-        }
-        else
-        {
-            if (_dashCooldownImage_P2 != null)
-                _dashCooldownImage_P2.fillAmount = 1 - cooldownAmount;
-        }
+        if (_dashCooldownImage_P1 != null)
+            _dashCooldownImage_P1.fillAmount = 1 - cooldownAmount;
     }
+
     public void SetDashColor(Color color)
     {
         _dashCooldownImage_P1.color = color;
     }
+
     public void ShowResultPanel(bool isGameWon)
     {
         _resultPanel.SetActive(true);

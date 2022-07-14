@@ -13,7 +13,6 @@ public class OurPlayerController : MonoBehaviourPunCallbacks
     public static GameObject LocalPlayerInstance;
 
     [Header("General Settings")]
-    [SerializeField] bool _isPlayerTwo = false;
     [SerializeField] KeyCode _jumpKey = KeyCode.W;
     [SerializeField] KeyCode _dashKey = KeyCode.D;
     [SerializeField] SpriteRenderer _playerSprite;
@@ -222,7 +221,7 @@ public class OurPlayerController : MonoBehaviourPunCallbacks
         }
 
         var cooldownPrecentage = _currentDashCooldownRemaining / _dashCooldown;
-        GameManager.Instance.UiHandler.DashCooldownUI(cooldownPrecentage, _isPlayerTwo);
+        GameManager.Instance.UiHandler.DashCooldownUI(cooldownPrecentage);
     }
 
     IEnumerator DisableGravity()
