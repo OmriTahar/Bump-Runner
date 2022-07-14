@@ -63,13 +63,13 @@ public class UIHandler : MonoBehaviour
         switch (winPlacement)
         {
             case 1:
-                _winningText.text = "First Place: " + name;
+                _winningText.text += "First Place: " + name + "\n";
                 break;
             case 2:
-                _winningText.text = "Second Place: " + name;
+                _winningText.text += "Second Place: " + name + "\n";
                 break;
             case 3:
-                _winningText.text = "Third Place: " + name;
+                _winningText.text += "Third Place: " + name;
                 break;
             default:
                 break;
