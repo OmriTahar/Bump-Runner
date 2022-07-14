@@ -15,9 +15,8 @@ public class UIHandler : MonoBehaviour
 
     [Header("Game Results")]
     [SerializeField] GameObject _resultPanel;
-    [SerializeField] TextMeshProUGUI _resultText;
-    [SerializeField] GameObject _winningText;
-    [SerializeField] GameObject _losingText;
+    [SerializeField] TextMeshProUGUI _winningText;
+    [SerializeField] TextMeshProUGUI _losingText;
 
     [Header("Player UI")]
     [SerializeField] Image _dashCooldownImage_P1;
@@ -54,9 +53,9 @@ public class UIHandler : MonoBehaviour
         _resultPanel.SetActive(true);
         
         if (isGameWon)
-            _winningText.SetActive(true);
+            _winningText.gameObject.SetActive(true);
         else
-            _losingText.SetActive(true);
+            _losingText.gameObject.SetActive(true);
     }
 
     public void ChangeResultsText(string name, int winPlacement)
@@ -64,13 +63,13 @@ public class UIHandler : MonoBehaviour
         switch (winPlacement)
         {
             case 1:
-                _resultText.text = "First Place: " + name;
+                _winningText.text = "First Place: " + name;
                 break;
             case 2:
-                _resultText.text = "Second Place: " + name;
+                _winningText.text = "Second Place: " + name;
                 break;
             case 3:
-                _resultText.text = "Third Place: " + name;
+                _winningText.text = "Third Place: " + name;
                 break;
             default:
                 break;
