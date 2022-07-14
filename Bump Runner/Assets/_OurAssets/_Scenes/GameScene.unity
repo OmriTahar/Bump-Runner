@@ -9360,8 +9360,8 @@ MonoBehaviour:
   _roomName: {fileID: 2091673285}
   _readyPanel: {fileID: 1664173127}
   _resultPanel: {fileID: 1534335186}
-  _winningText: {fileID: 104279284}
-  _losingText: {fileID: 1927201950}
+  _winningText: {fileID: 104279286}
+  _losingText: {fileID: 1927201952}
   _dashCooldownImage_P1: {fileID: 2053155185}
 --- !u!1 &1534335186
 GameObject:
