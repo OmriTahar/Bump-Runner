@@ -49,7 +49,7 @@ public class UIHandler : MonoBehaviour
         _dashCooldownImage_P1.color = color;
     }
 
-    public void ShowResultPanel(bool isGameWon)
+    public void ShowResultPanel(bool isGameWon) // Before Changes
     {
         _resultPanel.SetActive(true);
         
@@ -57,5 +57,23 @@ public class UIHandler : MonoBehaviour
             _winningText.SetActive(true);
         else
             _losingText.SetActive(true);
+    }
+
+    public void ChangeResultsText(string name, int winPlacement)
+    {
+        switch (winPlacement)
+        {
+            case 1:
+                _resultText.text = "First Place: " + name;
+                break;
+            case 2:
+                _resultText.text = "Second Place: " + name;
+                break;
+            case 3:
+                _resultText.text = "Third Place: " + name;
+                break;
+            default:
+                break;
+        }
     }
 }

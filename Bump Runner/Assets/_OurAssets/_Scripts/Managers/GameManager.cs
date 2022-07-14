@@ -29,18 +29,19 @@ public class GameManager : MonoSingleton<GameManager>
     Tilemap _tilemap;
     public Tilemap tilemap { set => _tilemap = value; }
 
-    bool _isPlayerReady;
-    bool _isPlaying = false;
-    bool _isGameWon = false;
-    bool _isGameLost = false;
-    float _currentTimeScale;
-    string _myName = PhotonNetwork.NickName;
+    private bool _isPlayerReady;
+    private bool _isPlaying = false;
+    private bool _isGameWon = false;
+    private bool _isGameLost = false;
+    private float _currentTimeScale;
+    private string _myName = PhotonNetwork.NickName;
 
-    //winning and losing
-    List <int> _winOrder = new List<int>();
-    int _maxPlayersThatCanWin = 3;
-    bool _isGameOver = false;
-    [SerializeField] float _gameOverCooldown = 0.5f;
+    // --------------- RESULTS ----------
+    private List <int> _winOrder = new List<int>();
+    private int _maxPlayersThatCanWin = 3;
+    private bool _isGameOver = false;
+    [SerializeField] private float _gameOverCooldown = 0.5f;
+
     #endregion
 
     void Start()
@@ -95,6 +96,7 @@ public class GameManager : MonoSingleton<GameManager>
         _isPlayerReady = true;
         UiHandler.SetReadyScreen(false);
         _maxPlayersThatCanWin = PhotonNetwork.CurrentRoom.PlayerCount;
+
         var currentPlayer = PhotonNetwork.Instantiate(_playerPrefab.name, _playersSpawnPoints[CurrentUserID].transform.position, Quaternion.identity, 0);
         var ourPlayerController = currentPlayer.GetComponent<OurPlayerController>();
 
@@ -126,13 +128,20 @@ public class GameManager : MonoSingleton<GameManager>
     {
         _isGameWon = true;
         photonView.RPC("AddWinningPlayer", RpcTarget.AllBuffered, CurrentUserID);
-
+        photonView.RPC("SendWinningPlayer", RpcTarget.AllBuffered, _myName);
     }
+
     [PunRPC]
     public void AddWinningPlayer(int playerID)
     {
         _winOrder.Add(playerID);
-        Debug.Log($"Player {playerID} has gotten to the vicroty gate!");
+        Debug.Log($"Player {playerID} has reached the vicroty gate!");
+    }
+
+    [PunRPC]
+    public void SendWinningPlayer(string playerName)
+    {
+        UiHandler.ChangeResultsText(playerName, _winOrder.Count);
     }
 
     public void GameLost()
@@ -140,11 +149,13 @@ public class GameManager : MonoSingleton<GameManager>
         _isGameLost = true;
         photonView.RPC("ReduceMaxWinsAmount", RpcTarget.AllBuffered);
     }
+
     [PunRPC]
     public void ReduceMaxWinsAmount()
     {
         _maxPlayersThatCanWin -= 1;
     }
+
     private void GameOver()
     {
         if (PhotonNetwork.IsMasterClient)
@@ -153,6 +164,7 @@ public class GameManager : MonoSingleton<GameManager>
             photonView.RPC("LeaveGameRoom", RpcTarget.AllBuffered);
         }
     }
+
     [PunRPC]
     public void LeaveGameRoom()
     {
@@ -160,11 +172,13 @@ public class GameManager : MonoSingleton<GameManager>
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene(0);
     }
+
     IEnumerator GameOverCooldown()
     {
         yield return new WaitForSeconds(_gameOverCooldown);
         _isGameOver = true;
     }
+
     public void SlowTime(bool isGameWon)
     {
         _currentTimeScale = Time.timeScale;
@@ -177,6 +191,7 @@ public class GameManager : MonoSingleton<GameManager>
             _isPlaying = false;
             _isGameWon = false;
             UiHandler.ShowResultPanel(isGameWon);
+
             StartCoroutine(GameOverCooldown());
         }
         else
@@ -227,26 +242,5 @@ public class GameManager : MonoSingleton<GameManager>
         }
         else
             _playerAvatars[currentUserID].SetActive(true);
-
-        //if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
-        //{
-        //    _playerAvatars[0].gameObject.SetActive(true);
-        //    _playerAvatars[1].gameObject.SetActive(false);
-        //    _playerAvatars[2].gameObject.SetActive(false);
-        //}
-        //else if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
-        //{
-        //    _playerAvatars[0].gameObject.SetActive(true);
-        //    _playerAvatars[1].gameObject.SetActive(true);
-        //    _playerAvatars[2].gameObject.SetActive(false);
-
-        //}
-        //else if (PhotonNetwork.CurrentRoom.PlayerCount == 3)
-        //{
-        //    _playerAvatars[0].gameObject.SetActive(true);
-        //    _playerAvatars[1].gameObject.SetActive(true);
-        //    _playerAvatars[2].gameObject.SetActive(true);
-        //}
     }
-
 }
