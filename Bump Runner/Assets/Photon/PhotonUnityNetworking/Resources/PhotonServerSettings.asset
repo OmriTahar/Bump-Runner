@@ -60,6 +60,8 @@ MonoBehaviour:
   - ReduceMaxWinsAmount
   - LeaveGameRoom
   - SendWinningPlayer
+  - GameOver
+  - HasBeenSlowedDown
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
