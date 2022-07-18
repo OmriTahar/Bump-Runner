@@ -25,7 +25,7 @@ public class UIHandler : MonoBehaviour
     {
         if (PhotonNetwork.CurrentRoom != null)
         {
-            _roomName.text = "RoomName: " + PhotonNetwork.CurrentRoom.Name;
+            _roomName.text = "Room Name: " + PhotonNetwork.CurrentRoom.Name;
         }
 
         _readyPanel.SetActive(true);
