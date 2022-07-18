@@ -23,7 +23,6 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
             _isConnecting = PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = _gameVersion;
             print("Is connecting = " + _isConnecting);
-            //PhotonNetwork.autojoinlobby
         }
         else
         {

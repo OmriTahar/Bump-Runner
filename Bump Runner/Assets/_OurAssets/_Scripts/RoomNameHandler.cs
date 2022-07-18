@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Photon.Pun;
+using Photon.Realtime;
 
-public class RoomNameHandler : MonoBehaviour
+public class RoomNameHandler : MonoBehaviourPunCallbacks
 {
 
     [SerializeField] private TextMeshProUGUI _roomNamePrefab;
@@ -24,6 +25,18 @@ public class RoomNameHandler : MonoBehaviour
             }
         }
 
+        CreateRoomName(roomName);
+        //photonView.RPC("SendRoomName", RpcTarget.AllBuffered, roomName);
+    }
+
+    //[PunRPC]
+    //public void SendRoomName(string nameToSend)
+    //{
+    //    CreateRoomName(nameToSend);
+    //}
+
+    private void CreateRoomName(string roomName)
+    {
         var prefabInstance = Instantiate(_roomNamePrefab, transform);
         prefabInstance.name = roomName;
         prefabInstance.text = roomName;
@@ -31,6 +44,22 @@ public class RoomNameHandler : MonoBehaviour
 
         print("Added room! room name: " + roomName);
     }
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        base.OnRoomListUpdate(roomList);
+
+        foreach (var roomInfo in roomList)
+        {
+            Debug.Log("Added new room: " + roomInfo.Name);
+            CreateRoomName(roomInfo.Name);
+        }
+    }
+
+    //public void RefreshRoomList()
+    //{
+    //    photon
+    //}
 
     public void RemoveRoomName(string roomName)
     {
