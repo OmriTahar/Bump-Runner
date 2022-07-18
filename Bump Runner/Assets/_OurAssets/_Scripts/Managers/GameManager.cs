@@ -1,10 +1,10 @@
+using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
-using Photon.Realtime;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -35,9 +35,10 @@ public class GameManager : MonoSingleton<GameManager>
     private bool _isGameLost = false;
     private float _currentTimeScale;
     private string _myName = PhotonNetwork.NickName;
-
+    private List<int> _slowedDownPlayers;
+    private bool _isSlowedDown = false;
     // --------------- RESULTS ----------
-    private List <int> _winOrder = new List<int>();
+    private List<int> _winOrder = new List<int>();
     private int _maxPlayersThatCanWin = 3;
     private bool _isGameOver = false;
     [SerializeField] private float _gameOverCooldown = 0.5f;
@@ -81,12 +82,14 @@ public class GameManager : MonoSingleton<GameManager>
         }
         if (_winOrder.Count == _maxPlayersThatCanWin)
         {
-
-            Debug.Log("Game is over");
-            StartCoroutine(GameOverCooldown());
+            if (_slowedDownPlayers.Count >= PhotonNetwork.CurrentRoom.PlayerCount)
+            {
+                Debug.Log("Game is over");
+                StartCoroutine(GameOverCooldown());
+            }
         }
     }
-
+    #region SetUp
     void StartSetUP()
     {
         UiHandler.SetReadyScreen(true);
@@ -107,7 +110,7 @@ public class GameManager : MonoSingleton<GameManager>
             ourPlayerController.SetPlayer(_obstaclesTilemap, CurrentUserID);
         }
 
-        if(PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
             _gridScroll.StartGrid();
         }
@@ -115,7 +118,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void PlayerIsReady()
     {
-        photonView.RPC("StartGameForAll",RpcTarget.AllBuffered);
+        photonView.RPC("StartGameForAll", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
@@ -124,12 +127,18 @@ public class GameManager : MonoSingleton<GameManager>
         Debug.Log($"Starting Game for player: {CurrentUserID}");
         StartGame();
     }
-
+    #endregion
+    #region Win and Lose
     public void GameWon()
     {
         _isGameWon = true;
         photonView.RPC("AddWinningPlayer", RpcTarget.AllBuffered, CurrentUserID);
         photonView.RPC("SendWinningPlayer", RpcTarget.AllBuffered, _myName);
+    }
+    public void GameLost()
+    {
+        _isGameLost = true;
+        photonView.RPC("ReduceMaxWinsAmount", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
@@ -145,16 +154,38 @@ public class GameManager : MonoSingleton<GameManager>
         UiHandler.ChangeResultsText(playerName, _winOrder.Count);
     }
 
-    public void GameLost()
-    {
-        _isGameLost = true;
-        photonView.RPC("ReduceMaxWinsAmount", RpcTarget.AllBuffered);
-    }
-
     [PunRPC]
     public void ReduceMaxWinsAmount()
     {
         _maxPlayersThatCanWin -= 1;
+    }
+    public void SlowTime(bool isGameWon)
+    {
+        _currentTimeScale = Time.timeScale;
+
+        if (_currentTimeScale <= 0.1)
+        {
+            _currentTimeScale = 0;
+            Time.timeScale = 0.1f;
+
+            UiHandler.ShowResultPanel(isGameWon);
+            if (!_isSlowedDown)
+            {
+                //send rpc
+                photonView.RPC("HasBeenSlowedDown", RpcTarget.AllBuffered,CurrentUserID);
+                _isSlowedDown = true;
+            }
+        }
+        else
+        {
+            _currentTimeScale -= Time.deltaTime;
+            Time.timeScale = _currentTimeScale;
+        }
+    }
+    [PunRPC]
+    public void HasBeenSlowedDown(int id)
+    {
+        _slowedDownPlayers.Add(id);
     }
 
     private void GameOver()
@@ -166,38 +197,22 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    [PunRPC]
-    public void LeaveGameRoom()
-    {
-            Time.timeScale = 1;
-            PhotonNetwork.LeaveRoom();
-            SceneManager.LoadScene(0);
-    }
-
     IEnumerator GameOverCooldown()
     {
         yield return new WaitForSeconds(_gameOverCooldown);
         GameOver();
     }
 
-    public void SlowTime(bool isGameWon)
+    [PunRPC]
+    public void LeaveGameRoom()
     {
-        _currentTimeScale = Time.timeScale;
-
-        if (_currentTimeScale <= 0.1)
-        {
-            _currentTimeScale = 0;
-            Time.timeScale = 0.1f;
-
-            UiHandler.ShowResultPanel(isGameWon);
-        }
-        else
-        {
-            _currentTimeScale -= Time.deltaTime;
-            Time.timeScale = _currentTimeScale;
-        }
+        Time.timeScale = 1;
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene(0);
     }
 
+    #endregion
+    #region Room Managment
     [PunRPC]
     public void EnteredRoom(int playerId)
     {
@@ -218,18 +233,6 @@ public class GameManager : MonoSingleton<GameManager>
         Debug.Log("Player nubmer: " + otherPlayer.ActorNumber + " has DISCONNECTED!");
         photonView.RPC("TogglePlayerAvatar", RpcTarget.AllBuffered, otherPlayer.ActorNumber - 1);
     }
-
-    public void SendTileDestruction(Vector3 hitPosition)
-    {
-        photonView.RPC("DestroyTile", RpcTarget.AllBuffered, hitPosition);
-    }
-
-    [PunRPC]
-    public void DestroyTile(Vector3 hitPosition)
-    {
-        _tilemap.SetTile(_tilemap.WorldToCell(hitPosition), null);
-    }
-
     [PunRPC]
     public void TogglePlayerAvatar(int currentUserID)
     {
@@ -240,4 +243,17 @@ public class GameManager : MonoSingleton<GameManager>
         else
             _playerAvatars[currentUserID].SetActive(true);
     }
+    #endregion
+    #region Tile Managment
+    public void SendTileDestruction(Vector3 hitPosition)
+    {
+        photonView.RPC("DestroyTile", RpcTarget.AllBuffered, hitPosition);
+    }
+
+    [PunRPC]
+    public void DestroyTile(Vector3 hitPosition)
+    {
+        _tilemap.SetTile(_tilemap.WorldToCell(hitPosition), null);
+    }
+    #endregion
 }
