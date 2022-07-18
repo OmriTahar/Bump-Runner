@@ -26,14 +26,7 @@ public class RoomNameHandler : MonoBehaviourPunCallbacks
         }
 
         CreateRoomName(roomName);
-        //photonView.RPC("SendRoomName", RpcTarget.AllBuffered, roomName);
     }
-
-    //[PunRPC]
-    //public void SendRoomName(string nameToSend)
-    //{
-    //    CreateRoomName(nameToSend);
-    //}
 
     private void CreateRoomName(string roomName)
     {
