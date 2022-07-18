@@ -35,7 +35,7 @@ public class GameManager : MonoSingleton<GameManager>
     private bool _isGameLost = false;
     private float _currentTimeScale;
     private string _myName = PhotonNetwork.NickName;
-    private List<int> _slowedDownPlayers;
+    private List<int> _slowedDownPlayers = new List<int>();
     private bool _isSlowedDown = false;
     // --------------- RESULTS ----------
     private List<int> _winOrder = new List<int>();
