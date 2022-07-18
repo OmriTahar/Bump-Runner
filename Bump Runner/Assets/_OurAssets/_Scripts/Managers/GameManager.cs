@@ -79,10 +79,11 @@ public class GameManager : MonoSingleton<GameManager>
         {
             SlowTime(false);
         }
-        if (_winOrder.Count == _maxPlayersThatCanWin && _isGameOver)
+        if (_winOrder.Count == _maxPlayersThatCanWin)
         {
+
             Debug.Log("Game is over");
-            GameOver();
+            StartCoroutine(GameOverCooldown());
         }
     }
 
@@ -176,7 +177,7 @@ public class GameManager : MonoSingleton<GameManager>
     IEnumerator GameOverCooldown()
     {
         yield return new WaitForSeconds(_gameOverCooldown);
-        _isGameOver = true;
+        GameOver();
     }
 
     public void SlowTime(bool isGameWon)
@@ -188,11 +189,7 @@ public class GameManager : MonoSingleton<GameManager>
             _currentTimeScale = 0;
             Time.timeScale = 0.1f;
 
-            _isPlaying = false;
-            _isGameWon = false;
             UiHandler.ShowResultPanel(isGameWon);
-
-            StartCoroutine(GameOverCooldown());
         }
         else
         {
