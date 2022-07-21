@@ -31,6 +31,6 @@ public class RoomCreationHandler : MonoBehaviourPunCallbacks
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         base.OnCreateRoomFailed(returnCode, message);
-        _errorText.text = "Room named '" + _inputField.text + "' is already exists";
+        _errorText.text = "Room named '" + _inputField.text + "' already exists";
     }
 }
